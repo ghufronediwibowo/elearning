@@ -1,0 +1,62 @@
+
+
+		  		<div class="left"><h2> DATA GURU </h2></div>
+          		<div class="right"><h2><a href="?page=guru.form_insert"> Tambah Data? </a></h2></div>
+	            
+	            <div class="clearfix"> </div>
+
+	            <div class="content-table">
+			 	    <div class="table-responsive">
+		                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+		                    <thead>
+		                        <tr>
+		                            <th style="background-color: #515151; width:5%" > No </th>
+		                            <th style="background-color: #515151; width:10%" > NIP </th>
+		                            <th style="background-color: #515151; width: 20%" > Nama Guru </th>
+		                            <th style="background-color: #515151;  width: 30%" > Tugas Mengajar </th>
+		                            <th style="background-color: #515151;" > Telepon </th>
+		                            <th style="background-color: #515151;" > Status </th>
+		                            <th style="background-color: #515151; width: 23%" > Aksi </th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <?php
+		                        	$query = mysql_query('SELECT *
+														  FROM
+															`elearning`.`mengajar_mapel`
+															INNER JOIN `elearning`.`pengguna` 
+														     ON (`mengajar_mapel`.`kode_mapel` = `pengguna`.`kode_mapel`)
+														  WHERE `level` = "GURU"');
+
+		                        	$num = 1;
+		                        	while ($row = mysql_fetch_array($query)) {
+		                        		
+		                        		$txt_del = "'Yakin ".$row[6]." akan dihapus?'";
+
+		                        		echo '
+		                        				<tr>
+		                        					<td align="center">'.$num.'</td>
+		                        					<td>'.$row[2].'</td>
+                                                    <td>'.$row[6].'</td>
+                                                    <td>'.$row[1].'</td>
+                                                    <td align="center">'.$row[12].'</td>
+                                                    <td align="center">'.$row[13].'</td>
+                                                    <td align="center">
+						                                <p>
+						                                	<a href="?page=guru.detail&id='.$row[2].'" class="btn-detail">Detail</a> &nbsp;
+						                                    <a href="?page=guru.form_edit&id='.$row[2].'" class="btn-edit">Edit</a> &nbsp;
+						                                    <a onclick="return confirm('.$txt_del.')" href="?page=guru.delete&id='.$row[2].'" class="btn-hapus">Hapus</a>
+						                                </p>
+						                            </td>
+		                        				</tr>
+		                        			 ';
+
+		                        		$num++;
+		                        	}
+		                        ?>
+		                    </tbody>
+		                </table>   
+		            </div>  <!-- /.table-responsive  -->
+				</div> 
+				
+				

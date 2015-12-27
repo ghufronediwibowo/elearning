@@ -1,0 +1,57 @@
+
+        	<?php
+
+        		$id = $_GET['id'];
+
+        		$query  = "select * from kelas where id_kelas = '".$id."'";
+        		$result = mysql_query($query);
+        		$row    = mysql_fetch_assoc($result);
+
+        		foreach ($row as $field => $data) {
+        		 	$$field=$data;
+        		 }
+
+				$kelas = ['X', 'XI', 'XII'];
+		        $select_kelas = null;
+		        foreach ($kelas as $kelasnya) {
+		            $data_kelas  = $kelasnya == $row['kelas'] ? 'selected' : null;
+		            $select_kelas .= '<option '.$data_kelas.' value="'.$kelasnya.'"> '.$kelasnya.' </option>';
+		        }
+        	?>
+			 	
+			 	<h2 class="h2-padding">EDIT DATA KELAS</h2>
+
+			 	<form action="?page=kelas.update" method="POST"> 
+					<input name="hidden_id_kelas" type="hidden"  value="<?php echo($id_kelas); ?>">
+			 	   	<div>
+				     	<label>Nama Kelas</label>
+				    	<div>
+				      		<input id="kelas" name="nama_kelas" type="text"  value="<?php echo($nama_kelas); ?>">
+				    	</div>
+				  	</div>
+
+					<div>
+				      	<label>
+				        	Kelas
+				      	</label>
+				      	<div>
+				        	<select name="kelas">
+				          		<?php echo($select_kelas); ?>
+				          	</select>
+				      	</div>
+				    </div>
+
+				  	<div>
+				    	<label> Jurusan </label>
+				    	<div>
+				      		<input id="jurusan" name="jurusan" type="text" value="<?php echo($jurusan)?>">
+				    	</div>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+				</form>

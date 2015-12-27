@@ -1,0 +1,30 @@
+<?php
+	
+	$var_id_kontak = $_POST['id_kontak'];
+	$var_alamat	   = $_POST['jancukkkkkkk'];
+	$var_telepon   = $_POST['telepon'];
+	$var_email	   = $_POST['email'];
+	$var_facebook  = $_POST['facebook'];
+	$var_twitter   = $_POST['twitter'];
+
+	$query = "update kontak set alamat = '".$var_alamat."',
+							   telepon = '".$var_telepon."',
+							     email = '".$var_email."',
+							  facebook = '".$var_facebook."',
+							  twitter  = '".$var_twitter."'
+					   where id_kontak = '".$var_id_kontak."'";
+					   #echo $query;exit;
+	$result = mysql_query($query);
+
+	if ($result) {
+
+            echo '<script type="text/javascript">alert("Data tersimpan");</script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=kontak.data">';
+        
+        }   else {
+            
+            echo '<script type="text/javascript">alert("Gagal melakukan perintah query qone");</script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=kontak.data">';
+        
+        }
+?>

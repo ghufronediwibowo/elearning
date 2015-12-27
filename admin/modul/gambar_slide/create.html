@@ -1,0 +1,261 @@
+<?php
+
+$var_album 		 = $_POST['album'];
+
+$var_keterangan1 = htmlentities($_POST['keterangan1']);
+$var_keterangan2 = htmlentities($_POST['keterangan2']);
+$var_keterangan3 = htmlentities($_POST['keterangan2']);
+$var_keterangan4 = htmlentities($_POST['keterangan3']);
+$var_keterangan5 = htmlentities($_POST['keterangan5']);
+$var_keterangan6 = htmlentities($_POST['keterangan6']);
+$var_keterangan7 = htmlentities($_POST['keterangan7']);
+
+$typeGambar      = array('image/bmp', 'image/gif', 'image/jpg', 'image/jpeg', 'image/png');
+
+$lokasi_file1    = $_FILES['gambar1']['tmp_name'];
+$var_gambar1 	 = $_FILES['gambar1']['name'];
+$fileError1  	 = $_FILES['gambar1']['error'];    
+
+$lokasi_file2    = $_FILES['gambar2']['tmp_name'];
+$var_gambar2 	 = $_FILES['gambar2']['name'];
+$fileError2  	 = $_FILES['gambar2']['error'];    
+
+$lokasi_file3    = $_FILES['gambar3']['tmp_name'];
+$var_gambar3	 = $_FILES['gambar3']['name'];
+$fileError3  	 = $_FILES['gambar3']['error'];    
+
+
+$lokasi_file4    = $_FILES['gambar4']['tmp_name'];
+$var_gambar4 	 = $_FILES['gambar4']['name'];
+$fileError4  	 = $_FILES['gambar4']['error'];    
+
+
+$lokasi_file5    = $_FILES['gambar5']['tmp_name'];
+$var_gambar5  	 = $_FILES['gambar5']['name'];
+$fileError5  	 = $_FILES['gambar5']['error'];    
+
+
+$lokasi_file6    = $_FILES['gambar6']['tmp_name'];
+$var_gambar6  	 = $_FILES['gambar6']['name'];
+$fileError6  	 = $_FILES['gambar6']['error'];    
+
+
+$lokasi_file7    = $_FILES['gambar7']['tmp_name'];
+$var_gambar7 	 = $_FILES['gambar7']['name'];
+$fileError7  	 = $_FILES['gambar7']['error'];    
+
+
+if(!in_array($_FILES['gambar1']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+
+elseif($fileSize=$_FILES['gambar1']['size']< 20000 || $fileError1 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar1."',
+	             '".$var_keterangan1."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		    
+		    $derektori="../images/".$var_gambar1;
+		    move_uploaded_file($lokasi_file1,"$derektori");
+
+		} 
+	}
+
+elseif(!in_array($_FILES['gambar2']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar2 salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+
+
+if($fileSize=$_FILES['gambar2']['size']< 20000 || $fileError2 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar2."',
+	             '".$var_keterangan2."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		    
+		    $derektori="../images/".$var_gambar2;
+		    move_uploaded_file($lokasi_file2,"$derektori");
+
+		} 
+	}
+
+
+elseif(!in_array($_FILES['gambar3']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar3x salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+if($fileSize=$_FILES['gambar3']['size']< 20000 || $fileError3 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar3."',
+	             '".$var_keterangan3."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		    
+		    $derektori="../images/".$var_gambar3;
+		    move_uploaded_file($lokasi_file3,"$derektori");
+
+		   
+		} 
+	}
+
+elseif(!in_array($_FILES['gambar4']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar4 salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+if($fileSize=$_FILES['gambar4']['size']< 20000 || $fileError4 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar4."',
+	             '".$var_keterangan4."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		   $derektori="../images/".$var_gambar4;
+		    move_uploaded_file($lokasi_file4,"$derektori");
+		   
+		} 
+	}
+
+elseif(!in_array($_FILES['gambar5']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar5 salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+if($fileSize=$_FILES['gambar5']['size']< 20000 || $fileError5 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar5."',
+	             '".$var_keterangan5."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		    
+		   $derektori="../images/".$var_gambar5;
+		   move_uploaded_file($lokasi_file5,"$derektori");
+
+		   
+		} 
+	}
+
+elseif(!in_array($_FILES['gambar6']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar6 salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+if($fileSize=$_FILES['gambar6']['size']< 20000 || $fileError6 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar6."',
+	             '".$var_keterangan6."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		    
+		    $derektori="../images/".$var_gambar6;
+		    move_uploaded_file($lokasi_file6,"$derektori");
+		   
+		} 
+	}
+
+elseif(!in_array($_FILES['gambar7']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar7 salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.form_insert">';
+    }
+if($fileSize=$_FILES['gambar7']['size']< 20000 || $fileError7 < 20000)
+    {
+		$query="insert into gambar_slide 
+				(id_album,
+				 gambar,
+				 keterangan
+				) 
+				values 
+	        	('".$var_album."',
+	             '".$var_gambar7."',
+	             '".$var_keterangan7."')";
+	          // echo $query;
+	          // exit;
+		$result=mysql_query($query);
+		
+		if ($result)
+		{
+		    
+		    $derektori="../images/".$var_gambar7;
+		    move_uploaded_file($lokasi_file7,"$derektori");
+
+		    echo '<script type="text/javascript"> alert("Data berhasil disimpan."); </script>';
+			echo '<meta http-equiv="refresh" content="0;URL=?page=gambar_slide.data">';
+		   
+		} 
+	}
+
+
+?>
+

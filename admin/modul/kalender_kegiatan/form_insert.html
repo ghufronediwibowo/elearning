@@ -1,0 +1,65 @@
+
+		  		<div class="left"><h2> DATA KALENDER KEGIATAN </h2></div>
+
+		        <div class="clearfix"> </div>
+
+
+		        <div class="left">
+		        
+		            <form classa="form-horizontal" enctype="multipart/form-data" role="form" method="post" id="jadwal" name="jadwal" action="?page=kalender_kegiatan.create">
+		        
+                        <input name="date" id="date" placeholder="tgl acara" type="text" class="form-control"  required/>                  
+
+		                <br /> <br /> 
+		                
+                        <input name="time" id="time" placeholder="waktu"  type="text" class="form-control"  required> 
+
+		                <br /> <br />
+						
+						<input name="title" type="text" class="form-control" placeholder="Judul" required>
+
+						<br /> <br />
+						<textarea id="inggris" name="description" cols="80" rows="10" class="form-control" required placeholder="Uraian Acara"></textarea> 
+
+						<br /> <br />
+			           <button type="submit" class="btn-submit" name= "btn-submit"> Simpan</button>
+					</form>
+				</div>
+
+				<div class="left">
+			        <div id="eventCalendarHumanDate"></div>
+			    </div>
+
+				<script>
+		            $(document).ready(function() {
+		                $("#eventCalendarHumanDate").eventCalendar({
+		                    eventsjson: '../json/json.php',
+		                    jsonDateFormat: 'human'  // 'YYYY-MM-DD HH:MM:SS'
+		                });
+		            });
+		        </script>
+
+		        <script>
+
+					$.datetimepicker.setLocale('id');
+
+					$('#date').datetimepicker({
+						lang:'id',
+						timepicker:false,
+						format:'d/m/Y',
+						formatDate:'Y/m/d'
+					});
+
+					$('#time').datetimepicker({
+						datepicker:false,
+						timepicker:true,
+						format:'H:i:s',
+						step:5
+					});
+				</script>
+		            
+		       
+		       
+		         
+		        
+		     

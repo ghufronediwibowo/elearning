@@ -1,0 +1,41 @@
+				<?php
+
+					$id = $_GET['id'];
+				
+					$query  = 'select * from mengajar_mapel where kode_mapel = "'.$id.'"';
+					$result = mysql_query($query);
+					$row	= mysql_fetch_assoc($result);
+
+					foreach ($row as $field => $data) {
+        		 	$$field=$data;
+        		 }
+			 
+				?>
+			 	
+				<h2 class="h2-padding">EDIT DATA MATAPELAJARAN</h2>
+
+			 	<form action="?page=matapelajaran.update" method="POST"> 
+					
+					<input type="text" name="hidden_kode_mapel" value="<?php echo($kode_mapel); ?>">
+
+			 	   	<div>
+				     	<label>Kode Matapelajaran</label>
+				    	<div>
+				      		<input id="kode_mapel" name="kode_mapel" type="text"  value="<?php echo($kode_mapel)?>">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Mata Pelajaran</label>
+				    	<div>
+				      		<input id="mapel" name="mapel" type="text" value="<?php echo($mapel)?>">
+				    	</div>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+				</form>

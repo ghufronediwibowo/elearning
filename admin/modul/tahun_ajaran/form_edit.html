@@ -1,0 +1,31 @@
+			 	<?php
+			 		$id = $_GET['id'];
+
+			 		$query  = 'select * from tahun_ajaran where id_tahun_ajaran = "'.$id.'"';
+			 		$result = mysql_query($query);
+			 		$row    = mysql_fetch_assoc($result);
+
+			 		foreach ($row as $field => $data) {
+			 			$$field = $data;
+			 		}
+			 	?>
+
+			 	<h2 class="h2-padding">EDIT DATA TAHUN AJARAN</h2>
+
+			 	<form action="?page=tahun_ajaran.update" method="POST">
+			 	<input type="text" name="hidden_id_tahun_ajaran" value="<?php echo($id_tahun_ajaran)?>">
+				  	<div>
+				    	<label>Tahun Ajaran</label>
+				    	<div>
+				      		<input id="tahun_ajaran" name="tahun_ajaran" type="text" value="<?php echo($tahun_ajaran)?>">
+				    	</div>				  	
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+				</form>
+

@@ -1,0 +1,17 @@
+<?php
+$query = "SELECT file FROM kurikulum WHERE id_kurikulum = '".$_GET['id']."'"; 
+
+$result = mysql_query($query);
+if(!$result) echo "ERROR: ".$query."&lt;BR&gt;".sql_error()."&lt;BR&gt;";
+list($name, $type, $size, $content) =  mysql_fetch_array($result);
+
+header("Content-type: $type");
+  header("Content-length: $size");
+  header("Content-Disposition: attachment; filename=\\"$name\\"");
+  header("Content-Description: PHP Generated Data");
+  echo $data;
+
+exit;
+}
+?&gt;
+?>

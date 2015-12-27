@@ -1,0 +1,237 @@
+			 	<style type="text/css">
+					img {
+						width: 2.8cm;
+						height: 3.8cm;
+					}
+				</style>
+
+			 	<?php
+			 		
+			 		$query_kelas  = mysql_query('select * from kelas');
+				    $select_kelas = null;
+				    while ($row_kelas = mysql_fetch_assoc($query_kelas)) {
+				        $select_kelas .= '<option value="'.$row_kelas['id_kelas'].'">'.$row_kelas['nama_kelas'].'</option>';
+				    }
+
+				    $query_tahun_ajaran = mysql_query('select * from tahun_ajaran');
+				    $select_tahun_ajaran = null;
+				    while ($row_tahun_ajaran = mysql_fetch_assoc($query_tahun_ajaran)) {
+				    	$select_tahun_ajaran .= '<option value = "'.$row_tahun_ajaran['id_tahun_ajaran'].'">'.$row_tahun_ajaran['tahun_ajaran'].'</option>';
+				    }
+
+			 	?>
+
+
+			 	<h2 class="h2-padding">TAMBAH DATA SISWA</h2>
+
+			 	<form action="?page=siswa.create" method="POST" enctype="multipart/form-data"> 
+			
+			 	   	<div>
+				     	<label>Nama</label>
+				    	<div>
+				      		<input id="nama" name="nama" type="text"  value="">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>NIS</label>
+				    	<div>
+				      		<input id="nis" name="nis" type="text" value="">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tempat Lahir</label>
+				    	<div>
+				      		<input id="tempat_lahir" name="tempat_lahir" type="text"  value="">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tanggal Lahir</label>
+				    	<div>
+				      		<input type="text" name="tanggal_lahir" value="" id="tanggal_lahir"/>
+				    	</div>
+				  	</div>
+
+				  	<div>
+					   <label>Jenis Kelamin</label>
+
+				      	<div>
+				        
+				          		<input id="jenis_kelamin" name="jenis_kelamin" type="radio" value="Laki-laki" checked="checked" />
+				          		<label>Laki-laki</label> &nbsp; &nbsp; &nbsp;
+				        	
+				          		<input id="jenis_kelamin" name="jenis_kelamin" type="radio" value="Perempuan" />
+				          		<label>Perempuan</label>
+				        	
+				      	</div>
+				
+				  	</div>
+					
+					<div>
+				      	<label> Agama </label>
+				      	<div>
+				        	<select name="agama">
+				          		<option value="Islam">Islam</option>
+				          		<option value="Kristen">Kristen</option>
+				          		<option value="Khatolik">Khatolik</option>
+				          		<option value="Hindu">Hindu</option>
+				          		<option value="Budha">Budha</option>
+				          		<option value="Konghuchu">Konghuchu</option>
+				          		<option value="Lainnya">Lainnya</option>
+				        	</select>
+				      	</div>
+				    </div>
+
+				  	<div>
+				    	<label> Alamat </label>
+					    <div>
+					      	<textarea id="alamat" name="alamat"	rows="5"></textarea>
+					    </div>
+				  	</div>
+
+				  	<div>
+				      	<label>
+				        	Kelas
+				      	</label>
+				      	<div>
+				        	<select name="kelas">
+				        		<?php echo($select_kelas); ?>
+				        	</select>
+				      	</div>
+				    </div>
+
+				    <div>
+				      	<label>
+				        	Tahun Ajaran
+				      	</label>
+				      	<div>
+				        	<select name="tahun_ajaran">
+				          		<?php echo($select_tahun_ajaran); ?>
+				          	</select>
+				      	</div>
+				    </div>
+				    
+				  	<div>
+				    	<label>Telepon</label>
+				    	<div>
+				      		<input id="telepon" name="telepon" type="text" value="">
+				    	</div>
+				  	</div>
+
+				  	<div>
+					    <label> Email </label>
+					    <div>
+					      	<input id="email" name="email" type="email" value="">
+					    </div>
+					 </div>
+
+			 	   	<div>
+				     	<label> Username </label>
+				    	<div>
+				      		<input id="password" name="username" type="text" value="">
+				    	</div>
+				  	</div>
+				  	
+				  	<div>
+				    	<label> Password </label>
+				    	<div>
+				      		<input id="password" name="password" type="password" value="">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label> Verifikasi Password </label>
+				    	<div>
+				      		<input id="verifikasi_password" name="verifikasi_password" type="password">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label> Foto </label>
+					    <div>
+
+						    <div id="fileDisplayArea"> </div>	
+					      	
+					      	<div>
+					      		<input type="file" name="fupload" id="fileInput" OnClick="imageShow()">
+					    	</div>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				     	<label>Level</label>
+				    	<div>
+				      		<input id="level" name="level" type="level" value="SISWA" disabled="">
+				    	</div>
+				  	</div>
+
+				  	<div>
+					    <fieldset>
+					      	<legend>
+					        	Status
+					      	</legend>
+
+					      	<div>
+					        	<div>
+					          		<input id="status" name="status" type="radio" value="Aktif" checked="checked">
+					          		<label class="choice">Aktif</label>
+					        	</div>
+					        	<div>
+					          		<input id="status" name="status" type="radio" value="Tidak Aktif">
+					          		<label class="choice">Tidak Aktif</label>
+					        	</div>
+					      	</div>
+					    </fieldset>
+				  	</div>
+				  	
+					<div class="padding-btn">	
+						<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+    				</div>
+
+				</form>
+
+
+				<script type="text/javascript">		
+					$.datetimepicker.setLocale('id');
+
+					$('#tanggal_lahir').datetimepicker({
+						lang:'id',
+						timepicker:false,
+						format:'d/m/Y',
+						formatDate:'Y/m/d'
+					});
+				</script>
+
+				<script type="text/javascript">
+					function imageShow() {
+					    var fileInput = document.getElementById('fileInput');
+					    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+					    fileInput.addEventListener('change', function(e) {
+					        var file = fileInput.files[0];
+					        var imageType = /image.*/;
+
+					        if (file.type.match(imageType)) {
+					            var reader = new FileReader();
+
+					            reader.onload = function(e) {
+					                fileDisplayArea.innerHTML = "";
+
+					                var img = new Image();
+					                img.src = reader.result;
+					                fileDisplayArea.appendChild(img);
+					            }
+
+					            reader.readAsDataURL(file);
+					        } else {
+					            fileDisplayArea.innerHTML = "File not supported!";
+					        }
+					    });
+
+					    }
+				</script>
+
+		

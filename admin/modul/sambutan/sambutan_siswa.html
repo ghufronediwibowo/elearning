@@ -1,0 +1,78 @@
+
+				<style type="text/css">
+					img {
+						width: 2.8cm;
+						height: 3.8cm;
+					}
+				</style>
+
+				<?php
+					$query  = mysql_query('select * from sambutan where id="1"');
+					$result = mysql_fetch_assoc($query);
+				?>
+
+			 	<form action="?page=sambutan.update" method="POST" enctype="multipart/form-data"> 
+
+			 		<input type="text" name="id" value="<?php echo($result['id_sambutan'])?>">
+			 		<div>
+				    	<label>Foto</label>
+					    	<div id="fileDisplayArea"> </div>	
+				      	<div>
+				      		<input type="file" name="fupload" id="fileInput" OnClick="imageShow()">
+				    	</div>
+				  	</div>
+			
+			 	   	<div>
+				     	<label>Sambutan</label>
+					    <div>
+					      	<textarea id="sambutan" name="sambutan_siswa" rows="5"></textarea>
+					    </div>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-edit" name="btnEdit" type="submit" value="Edit">
+      					</div>
+    				</div>
+
+				</form>
+
+				<script type="text/javascript">
+					function imageShow() {
+					    var fileInput = document.getElementById('fileInput');
+					    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+					    fileInput.addEventListener('change', function(e) {
+					        var file = fileInput.files[0];
+					        var imageType = /image.*/;
+
+					        if (file.type.match(imageType)) {
+					            var reader = new FileReader();
+
+					            reader.onload = function(e) {
+					                fileDisplayArea.innerHTML = "";
+
+					                var img = new Image();
+					                img.src = reader.result;
+					                fileDisplayArea.appendChild(img);
+					            }
+
+					            reader.readAsDataURL(file);
+					        } else {
+					            fileDisplayArea.innerHTML = "File tidak tersedia!!";
+					        }
+					    });
+
+					    }
+				</script>
+
+				 <script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('sambutan_siswa');
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>

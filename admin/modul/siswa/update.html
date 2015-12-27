@@ -1,0 +1,84 @@
+<?php
+
+	// $id = $_GET['id'];
+
+	$var_id_siswa		   = $_POST['hidden_id_pengguna'];
+	$var_nis 			     = htmlentities($_POST['nis']);
+	$var_nama			     = htmlentities($_POST['nama']);
+	$var_tempat_lahir	 = htmlentities($_POST['tempat_lahir']);
+	$var_tanggal_lahir = htmlentities(date_format(date_create($_POST['tanggal_lahir']),'Y-m-d'));
+  #echo($var_tanggal_lahir); exit;
+	$var_jenis_kelamin = htmlentities($_POST['jenis_kelamin']);
+	$var_agama			   = htmlentities($_POST['agama']);
+	$var_alamat			   = htmlentities($_POST['alamat']);
+	$var_kelas			   = htmlentities($_POST['kelas']);
+	$var_tahun_ajaran	 = htmlentities($_POST['tahun_ajaran']);
+	$var_telepon		   = htmlentities($_POST['telepon']);
+	$var_email 			   = htmlentities($_POST['email']);
+	$var_status			   = htmlentities($_POST['status']);
+
+	$lokasi_file 		= $_FILES['fupload']['tmp_name'];
+	$nama_file 			= $_FILES['fupload']['name'];
+ 	
+ 	if(!empty($nama_file))
+    {
+
+        $query = 'update pengguna set id_pengguna = "'.$var_nis.'",
+                                             nama = "'.$var_nama.'",
+                                     tempat_lahir = "'.$var_tempat_lahir.'",
+                                    tanggal_lahir = "'.$var_tanggal_lahir.'",
+                                    jenis_kelamin = "'.$var_jenis_kelamin.'",
+                                            agama = "'.$var_agama.'",
+                                           alamat = "'.$var_alamat.'",
+                                       id_kelas   = "'.$var_kelas.'",
+                                  id_tahun_ajaran = "'.$var_tahun_ajaran.'",
+                                          telepon = "'.$var_telepon.'",
+                                            email = "'.$var_email.'",
+                                            foto  = "'.$nama_file.'",
+                                            level = "SISWA",
+                                           status = "'.$var_status.'"
+                                where id_pengguna = "'.$var_id_siswa.'"';
+                                #echo($query);exit();
+        $result = mysql_query($query);
+
+        if ($result) {
+
+            $derektori="../images/".$nama_file;
+            move_uploaded_file($lokasi_file,"$derektori");
+            echo '<script type="text/javascript">alert("Data tersimpan");</script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=siswa.data">';
+        
+        }   else {
+            
+            echo '<script type="text/javascript">alert("Gagal melakukan perintah query qone");</script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=siswa.data">';
+        
+        }
+    }
+
+    else 
+    {
+
+        $query = 'update pengguna set id_pengguna = "'.$var_nis.'",
+                                             nama = "'.$var_nama.'",
+                                     tempat_lahir = "'.$var_tempat_lahir.'",
+                                    tanggal_lahir = "'.$var_tanggal_lahir.'",
+                                    jenis_kelamin = "'.$var_jenis_kelamin.'",
+                                            agama = "'.$var_agama.'",
+                                           alamat = "'.$var_alamat.'",
+                                        id_kelas  = "'.$var_kelas.'",
+                                  id_tahun_ajaran = "'.$var_tahun_ajaran.'",
+                                          telepon = "'.$var_telepon.'",
+                                            email = "'.$var_email.'",
+                                            level = "SISWA",
+                                           status = "'.$var_status.'"
+                                where id_pengguna = "'.$var_id_siswa.'"';
+        #echo($query);exit();
+        $result = mysql_query($query);
+        
+        echo '<script type="text/javascript">alert("Data tersimpan");</script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=siswa.data">';
+
+    }
+
+?>

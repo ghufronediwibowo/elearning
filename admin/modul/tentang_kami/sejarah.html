@@ -1,0 +1,64 @@
+
+			 	
+
+			 	<h2 class="h2-padding">DATA SEJARAH</h2>
+
+			 	<form action="#">
+
+				  	<div>
+				    	<label>Sejarah</label>
+				    	<div>
+				      		<textarea id="txt_isi_berita" name="txt_isi_berita" rows="25"></textarea> 
+				    	</div>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-edit" name="btnEdit" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+				</form>
+
+				<script type="text/javascript">
+					function imageShow() {
+					    var fileInput = document.getElementById('fileInput');
+					    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+					    fileInput.addEventListener('change', function(e) {
+					        var file = fileInput.files[0];
+					        var imageType = /image.*/;
+
+					        if (file.type.match(imageType)) {
+					            var reader = new FileReader();
+
+					            reader.onload = function(e) {
+					                fileDisplayArea.innerHTML = "";
+
+					                var img = new Image();
+					                img.src = reader.result;
+					                fileDisplayArea.appendChild(img);
+					            }
+
+					            reader.readAsDataURL(file);
+					        } else {
+					            fileDisplayArea.innerHTML = "File tidak tersedia!!";
+					        }
+					    });
+
+					    }
+				</script>
+
+
+				<script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('txt_isi_berita');
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>
+				
+

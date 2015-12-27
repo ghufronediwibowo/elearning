@@ -1,0 +1,22 @@
+<?php
+	
+	$var_kode_mapel	= htmlentities($_POST['kode_mapel']);
+	$var_mapel      = htmlentities($_POST['mapel']);
+	
+	$query	= 'update mengajar_mapel set kode_mapel = '.strip_tags("'$var_kode_mapel'").', mapel= '.strip_tags("'$var_mapel'").' where kode_mapel = "'.$_POST['hidden_kode_mapel'].'"';
+	#die($query);
+
+	$result = mysql_query($query);
+
+	if ($result) {
+
+		echo '<script type="text/javascript"> alert("Data berhasil disimpan.") </script>';
+		echo '<meta http-equiv="refresh" content=0;URL=?page=matapelajaran.data>';
+
+	} else {
+
+		echo '<script type="text/javascript"> alert(Data gagal disimpan!)</script>';
+		echo '<meta http-equiv="refresh" content="0;URL=?page=matapelajaran.data">';
+	}
+
+?>

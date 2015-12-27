@@ -1,0 +1,30 @@
+<?php
+	
+	function sql($tgl) {
+    	$tglsql = substr($tgl, 6, 4) . "-" . substr($tgl, 3, 2) . "-" . substr($tgl, 0, 2);
+    	return $tglsql;
+	}
+
+	if (isset($_POST['btn-submit'])) { // jika tombol btn-submit ditekan
+    $date1 = $_POST['date'];
+    $date = sql($date1);
+    $time = $_POST['time'];
+    $datetime = $date . ' ' . $time;
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+
+    $simpan = mysql_query("INSERT INTO kalender_kegiatan(
+                        tanggal,                       
+                        kegiatan, 
+                        keterangan)
+                        
+		VALUES(
+                        '$datetime',                        
+                        '$title', 
+                        '$description'                        
+                        )");
+    #echo($simpan);exit;
+  	echo '<script type="text/javascript"> alert("Jadwal berhasil Disimpan");</script>';
+	echo "<meta http-equiv='refresh' content='0; url=?page=kalender_kegiatan.form_insert'>";
+	}; // if(kondisi) {hasil}
+?>

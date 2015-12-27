@@ -1,0 +1,531 @@
+  /* -- Style Struktur --*/
+/*  body {
+      background: transparent;
+      color: #222;
+      font-family: 'Droid Serif', serif;
+      font-size: 16px;
+  }*/
+
+  #wrapper {
+      margin: 10px auto;
+      max-width: 980px;
+      width: 90%;
+      background: #fff;
+      padding: 10px 0;
+  }
+
+  /*-- /.Style Struktur --*/
+ 
+  
+  /*-- Style Utama --*/
+ 
+  header {
+      padding: 3px;
+  }
+
+  ::-moz-selection {
+      background-color: #91D8f7;
+      color: #fff;
+  }
+
+  ::selection {
+      background-color: #91D8f7;
+      color: #fff;
+  }
+
+  a {
+      outline: 0;
+      color: #222;
+      text-decoration: none;
+  }
+
+  a:hover {
+      /*text-decoration: underline;*/
+      color: #33adff;
+  }
+
+     a:active {
+        outline: 0;
+        position: relative;
+        top: 2px;
+    }
+ 
+  
+  p {
+        padding: 0 5px;
+  }
+
+    p a:hover {
+        color: #53bd84;
+    }
+
+ 
+  .clearfix {
+      clear: both;
+  }
+
+  .font-size {
+      font-size: 29px;
+  }
+
+  h1 {
+      font-family: "Lato,Calibri,Arial,sans-serif",serif;
+      padding: 3px;
+      margin: 5px 0 0;
+  }
+
+    h1 a {
+        text-decoration: none;
+    }
+ 
+  h4 {
+      font-family: "Lato,Calibri,Arial,sans-serif",serif;
+      padding: 3px;
+      margin: 5px 0 0;
+  }
+
+    h4 a {
+        text-decoration: underline;
+    }
+
+  .left-col {
+      width: 70%;
+      float: left;
+  }
+
+  .left-col-calendar {
+      width: 30%;
+      float: left;
+  }
+
+  .right-col-calendar {
+      width: 70%;
+      float: left;
+  }
+
+  .sidebar {
+      width: 30%;
+      float: right;
+      margin-bottom: 10px;
+  }
+
+  #about, #featured, #latest {
+      padding: 20px;
+  }
+
+  footer {
+      padding: 5px;
+  }
+
+  pre {
+      overflow: scroll;
+      font-size: 10px;
+  }
+
+  .well-sambutan {
+      margin: 20px;
+      border-color:#eee;
+      margin-bottom: 10px;
+      height:200px;
+      width: auto;
+      padding: 19px;
+      margin-bottom: 20px;
+      background-color: #F5F5F5;
+      border: 1px solid #E3E3E3;
+      border-radius: 4px;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+      overflow-y: scroll;
+  }
+
+  .thumbnail {
+      display: block;
+      padding: 4px;
+      margin-bottom: 20px;
+      line-height: 1.42857;
+      background-color: #FFF;
+      border: 1px solid #DDD;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out 0s;
+  }
+
+  .img-responsive-potrait{
+      display: block;
+      max-width: 104px;
+      height: 140px;
+  }
+
+  .img-responsive{
+      display: block;
+      max-width: 280px;
+      height: 160px;
+  }
+
+  /*-- /.Style Utama --*/
+
+
+  /*-- KALENDER KEGIATAN --*/
+
+  .datepicker {
+      position: relative;
+      margin: 20px;
+      padding: 4px;
+      font-size: 14px;
+      text-align: center;
+      background: #242930;
+      border: 1px solid #0e1013;
+      border-collapse: separate;
+      border-radius: 4px 4px 3px 3px;
+      -webkit-box-shadow: 0 1px #181c21, 0 2px #14171b, 0 3px 3px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px #181c21, 0 2px #14171b, 0 3px 3px rgba(0, 0, 0, 0.3);
+  }
+      .datepicker:before, .datepicker:after {
+          content: '';
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          width: 0;
+          height: 0;
+          margin-left: -4px;
+          border: 4px solid transparent;
+          border-bottom-color: #242930;
+      }
+
+        .datepicker:before {
+          top: -9px;
+          border-bottom-color: #14171b;
+        }
+
+  .datepicker-caption {
+      display: block;
+      position: relative;
+      line-height: 29px;
+      background: #333941;
+      border: 1px solid #1b1e24;
+      border-bottom-color: #181b21;
+      border-radius: 3px 3px 0 0;
+      background-image: -webkit-linear-gradient(top, #414b56, #323841 50%, #2b323a 50%, #252a31);
+      background-image: -moz-linear-gradient(top, #414b56, #323841 50%, #2b323a 50%, #252a31);
+      background-image: -o-linear-gradient(top, #414b56, #323841 50%, #2b323a 50%, #252a31);
+      background-image: linear-gradient(to bottom, #414b56, #323841 50%, #2b323a 50%, #252a31);
+      -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .datepicker-prev,
+  .datepicker-next {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 28px;
+      font: 0/0 a;
+      color: transparent;
+  }
+  
+      .datepicker-prev:before, .datepicker-prev:after,
+      .datepicker-next:before,
+      .datepicker-next:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          margin-top: -6px;
+          border: 6px solid transparent;
+      }
+
+      .datepicker-prev:before,
+      .datepicker-next:before {
+          margin-top: -5px;
+      }
+
+      .datepicker-prev {
+          left: 0;
+      }
+
+      .datepicker-prev:before, .datepicker-prev:after {
+          margin-left: -9px;
+      } 
+
+      .datepicker-prev:before {
+          border-right-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .datepicker-prev:after {
+          border-right-color: #181b21;
+      }
+
+  .datepicker-next {
+      right: 0;
+  }
+
+      .datepicker-next:before, .datepicker-next:after {
+          margin-left: -3px;
+      }
+
+      .datepicker-next:before {
+          border-left-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .datepicker-next:after {
+          border-left-color: #181b21;
+      }
+
+  .datepicker-title {
+      display: inline-block;
+      vertical-align: top;
+      line-height: 18px;
+      margin: 4px 0;
+      padding: 0 8px 1px;
+      font-weight: bold;
+      color: #8a99af;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      background: #242930;
+      border: 1px solid;
+      border-color: #151a1f #191c21 #1c2025;
+      border-radius: 2px;
+      -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .datepicker-head {
+      display: block;
+      background: #2a3139;
+      border: 1px solid #1b1e25;
+      border-width: 0 1px;
+  }
+
+  .datepicker-th {
+      width: 28px;
+      line-height: 24px;
+      padding-bottom: 1px;
+      font-weight: bold;
+      color: #18b165;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid #232833;
+  }
+
+  .datepicker-body {
+      display: block;
+      background: #404854;
+      border: 1px solid #1b1e25;
+      border-top: 0;
+      border-radius: 0 0 3px 3px;
+  }
+
+  .datepicker-td {
+      width: 28px;
+      line-height: 26px;
+      padding-bottom: 1px;
+      color: #8ba0b8;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid #323841;
+      -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+      .datepicker-td > a {
+          display: block;
+          color: inherit;
+          text-decoration: none;
+      }
+
+      .datepicker-td > a:hover {
+          color: #1dd87e;
+      }
+
+      .datepicker-td.today {
+          color: white;
+          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 14px rgba(255, 255, 255, 0.6);
+      }
+
+      .datepicker-td.off {
+          color: #677387;
+          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      }
+
+  tr:last-child > .datepicker-td {
+      border-bottom: 0;
+  }
+
+  .well-calendar {
+      margin: 20px;
+      border-color:#eee;
+      margin-bottom: 10px;
+      height:191px;
+      width: auto;
+      padding: 19px;
+      margin-bottom: 20px;
+      background-color: #F5F5F5;
+      border: 1px solid #E3E3E3;
+      border-radius: 4px;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+      overflow-x: scroll;
+  }
+
+  /*-- /.KALENDER KEGIATAN --*/
+
+
+  /*-- CAROUSEL --*/
+
+  .cf {
+      *zoom: 1;
+  }
+
+      .cf:before,
+      .cf:after {
+          content: " ";
+          display: table;
+      }
+
+      .cf:after {
+          clear: both;
+      }
+
+  #content {
+      padding: 10px;
+      margin: 0px auto;
+      display: block;
+      background: #595959;
+  }
+
+
+  #carousel-container {
+      position:relative;
+      webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      float: left;
+      clear: both;
+      width: 100%;
+  }
+
+      #carousel-container a {
+          color: #333;
+      }
+
+  #carousel {
+      float:left; 
+      width: 100%; 
+      overflow: hidden; 
+  }
+
+      #carousel ul {
+          position:relative;
+          left:-247px; 
+          list-style-type: none; 
+          margin: 0px !important;
+          padding: 0px !important;
+          width:9999px;
+          padding-bottom:10px;
+      }
+
+        #carousel ul li{
+            list-style-type:none;
+            float: left;
+            width: 237px; 
+            padding:0px;
+            margin: 0 5px  !important;
+        }
+
+        #carousel ul li:first-child{
+            margin-left:0px !important;
+        }
+
+        #carousel ul li:last-child{
+            margin-right:0px !important;
+        }
+
+  .carousel-thumb {
+      width:237px;
+      height:170px;
+  }
+
+      .carousel-thumb img {
+          width:100%;
+          height:100%;
+      }
+
+
+  #nav-carousel-left {
+      top:50%;
+      left:0px;
+  } 
+  #nav-carousel-right {
+      top:50%;
+      right:-16px;
+  }
+  
+  #nav-carousel-left, #nav-carousel-right{
+      position:absolute;
+      z-index:2;
+      height:48px;
+      width:48px;
+  }
+
+      #nav-carousel-left a, #nav-carousel-right a{
+          font-size:22px;
+          background: rgba(0, 0, 0, 0.34);
+          color:white;
+          padding: 10px;
+          text-decoration: none;
+      }
+
+      #nav-carousel-left a:hover, #nav-carousel-right a:hover{
+      background: rgba(0, 0, 0, 1);
+      }
+
+/*-- /.CAROUSEL --*/
+
+#map {
+  width: 630px;
+  height: 400px;
+}
+
+
+@media screen and (max-width:739px) {
+    body {
+        font-size: 13px;
+    }
+
+    #wrapper {
+       margin: 10px auto;
+       max-width: 980px;
+       width: 100%;
+       background: #fff;
+       padding: 10px 0;
+    }
+
+    .left-col, .sidebar, .right-col-calendar {
+        width: 100%
+    }
+  
+  .well-calendar {
+      margin: 20px;
+      border-color:#eee;
+      margin-bottom: 10px;
+      height:200px;
+      width: auto;
+      padding: 19px;
+      margin-bottom: 20px;
+      background-color: #F5F5F5;
+      border: 1px solid #E3E3E3;
+      border-radius: 4px;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+      overflow-y: scroll;
+  }
+
+
+  #map {
+    width: auto;
+    height: 400px;
+  }
+
+}
+
+@media screen and (max-width:1280px) {
+
+  #map {
+    width: auto;
+    height: 350px;
+  } 

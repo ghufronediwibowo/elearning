@@ -1,0 +1,135 @@
+<?php
+/*
+$var_kurikulum = $_POST['kurikulum'];
+$var_publish   = $_POST['publish'];
+$lokasi_file   = $_FILES['fupload']['tmp_name'];
+$nama_file     = $_FILES['fupload']['name'];
+$fileError     = $_FILES['fupload']['error'];    
+$typeGambar    = array('files/jpg','files/jpeg','files/png','files/gif','files/bmp','files/doc','files/docx','files/xls','files/xlsx','files/pdf');
+
+
+if(!in_array($_FILES['fupload']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.form_insert">';
+    }
+    elseif($fileSize=$_FILES['fupload']['size']< 100000 || $fileError < 100000)
+    {
+        $query  ="insert into berita 
+                  (
+                    id_kurikulum,
+                    isi_kurikulum,
+                    file,
+                    publish
+                  )  
+                  values 
+                  (
+                    '',
+                    '".$var_kurikulum."',
+                    '".$var_nama_file."',
+                    '".$var_publish."'
+                  )"; 
+        echo($query);exit();
+        $result = mysql_query($query);
+
+        if($result)
+        {
+            $derektori="../files/".$nama_file;
+            move_uploaded_file($lokasi_file,"$derektori");
+
+            echo '<script type="text/javascript"> alert("Data berhasil disimpan."); </script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+
+        } 
+        else 
+        {
+
+            echo '<script type="text/javascript"> alert("Data gagal disimpan!"); </script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+        }
+    }
+*/
+?>
+
+
+<?php
+// if($_POST['btnUpload'])
+// {
+// $fileName = $_FILES['fupload']['name'];
+// $tmpName = $_FILES['fupload']['tmp_name'];
+// $fileSize = $_FILES['fupload']['size'];
+// $fileType = $_FILES['fupload']['type'];
+
+// $uploadDir = '../files/';
+// $filePath = $uploadDir . $fileName;
+
+// $result = move_uploaded_file($tmpName, $filePath);
+// if (!$result) {
+// $error_message='Error uploading file';
+// echo('error asu'); exit;
+// }
+
+// if(!get_magic_quotes_gpc())
+// {
+// $fileName = addslashes($fileName);
+// $filePath = addslashes($filePath);
+// }
+
+// $query = 'INSERT INTO kurikulum(file) VALUES ("'.$fileName.'")';
+
+// #echo($query); exit;
+// $result=mysql_query($query);
+// if($result){
+// echo 'upload file berhasil dilakukan <br> <a href=`daftar_file.php`>Daftar File</a>';
+// echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+// }else{
+// echo '<br>File can`t uploaded<br>';
+// echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+// echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+// }
+// }
+?>
+
+
+<?php
+if(isset($_POST['btn-simpan']))
+{    
+     
+    $file = rand(1000,100000)."-".$_FILES['file']['name'];
+    $file_loc = $_FILES['file']['tmp_name'];
+    $file_size = $_FILES['file']['size'];
+    $file_type = $_FILES['file']['type'];
+    $folder="../files/";
+    
+    // new file size in KB
+    $new_size = $file_size/1024;  
+    // new file size in KB
+    
+    // make file name in lower case
+    $new_file_name = strtolower($file);
+    // make file name in lower case
+    
+    $final_file=str_replace(' ','-',$new_file_name);
+    
+    if(move_uploaded_file($file_loc,$folder.$final_file))
+    {
+        $sql="INSERT INTO kurikulum(file) VALUES('$final_file')"; #echo($sql);exit();
+        mysql_query($sql);
+        ?>
+        <script>
+        alert('successfully uploaded');
+        window.location.href='?page=kurikulum.data';
+        </script>
+        <?php
+    }
+    else
+    {
+        ?>
+        <script>
+        alert('error while uploading file');
+        window.location.href='?page=kurikulum.data';
+        </script>
+        <?php
+    }
+}
+?>

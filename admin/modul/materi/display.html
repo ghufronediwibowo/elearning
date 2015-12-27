@@ -1,0 +1,172 @@
+
+		  		<?php
+
+		  	    $var_mapel	      = $_POST['pilih_mapel'];
+	            $var_kelas        = $_POST['pilih_kelas'];
+	            $var_tahun_ajaran = $_POST['pilih_tahun_ajaran']; 
+		  		$var_semester     = $_POST['pilih_semester']; 
+		  		
+		  		$query_mapel  = mysql_query('select * from mengajar_mapel');
+	            $select_mapel = null;
+	            while ($row_mapel = mysql_fetch_assoc($query_mapel)) {
+	                $select_mapel .= '<option value="'.$row_mapel['kode_mapel'].'">'.$row_mapel['mapel'].'</option>';
+	            }
+
+	            $query_kelas    = mysql_query('select * from kelas');
+	            $select_kelas = null;
+	            while ($row_kelas = mysql_fetch_assoc($query_kelas)) {
+	                $select_kelas .= '<option value="'.$row_kelas['id_kelas'].'">'.$row_kelas['nama_kelas'].'</option>';
+	            }
+
+	            $query_tahun_ajaran = mysql_query('select * from tahun_ajaran');
+	            $select_tahun_ajaran = null;
+	            while ($row_tahun_ajaran = mysql_fetch_assoc($query_tahun_ajaran)) {
+	                  $select_tahun_ajaran .= '<option value="'.$row_tahun_ajaran['id_tahun_ajaran'].'">'.$row_tahun_ajaran['tahun_ajaran'].'</option>';
+	            }
+
+		  		$query_semester  = "select * from materi where semester = '".$var_semester."'";
+        		$result_semester = mysql_query($query);
+        		$row_semester    = mysql_fetch_assoc($result);
+
+				$semester = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+		        $select_semester = null;
+		        foreach ($semester as $semesternya) {
+		            $data_semester  = $semesternya == $row_semester['semester'] ? 'selected' : null;
+		            $select_semester .= '<option '.$data_semester.' value="'.$semesternya.'"> '.$semesternya.' </option>';
+		        }
+
+		  		?>
+
+		  		<div class="left"><h2> DATA MATERI </h2></div>
+                <?php
+                    if ($_SESSION['level']=="GURU") {
+                        echo ' <div class="right"><h2><a href="#"> Tambah Data? </a></h2></div> ';
+                    }
+                ?>
+          		
+
+          		<div class="clearfix"></div>
+
+          		<center>
+			      	
+          			<foRm action="?page=materi.display" method="POST">
+				      	<section class="grid">
+
+		                    <div class="breadcrumb">
+		                        <div>
+		                            <label> Matapelajaran </label>
+		                            <div>
+		                            	<select name="pilih_mapel">
+		                                	<?php echo $select_mapel ?>
+		                                </select>
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                    <div class="breadcrumb">
+		                        <div>
+		                            <label> Kelas </label>
+		                            <div>
+		                                <select name="pilih_kelas">
+		                                    <?php echo $select_kelas ?>
+		                                </select>
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                    <div class="breadcrumb">
+		                        <div>
+		                            <label> Tahun Ajaran </label>
+		                            <div>
+		                                <select name="pilih_tahun_ajaran">
+		                                    <?php echo $select_tahun_ajaran ?>
+		                                </select>
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                    <div class="breadcrumb">
+		                        <div>
+		                            <label> Semester </label>
+		                            <div>
+		                                <select name="pilih_semester">
+		                                    <?php echo $select_semester ?>
+		                                </select>
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                    <div class="breadcrumb">
+		                        <div>
+		                            <div>
+		                                <input type="submit" class="btn-tampilkan" value="Tampilkan">
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                </section> <!-- /.grid -->
+
+	                </foRm>
+			    </center>
+	            
+
+	            <div class="content-table">
+			 	    <div class="table-responsive">
+		                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+		                    <thead>
+		                        <tr>
+		                            <th style="background-color: #515151; width: 3%" > No </th>
+		                            <th style="background-color: #515151; width: 50% " > Judul Materi </th>
+		                            <th style="background-color: #515151; width: 15%" > Waktu/Tanggal </th>
+		                            <th style="background-color: #515151; width: 5%" > Penulis </th>
+		                            <th style="background-color: #515151; width: 25%" > Aksi </th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <?php
+
+		                        	$query = mysql_query('SELECT `materi`.`judul_materi`, `materi`.`tanggal`, `pengguna`.`nama`
+															FROM
+															    `elearning`.`pengguna`
+															    INNER JOIN `elearning`.`materi` 
+															        ON (`pengguna`.`id_pengguna` = `materi`.`id_pengguna`)
+															    INNER JOIN `elearning`.`tahun_ajaran` 
+															        ON (`materi`.`id_tahun_ajaran` = `tahun_ajaran`.`id_tahun_ajaran`)
+															    INNER JOIN `elearning`.`kelas` 
+															        ON (`materi`.`id_kelas` = `kelas`.`id_kelas`)
+															    INNER JOIN `elearning`.`mengajar_mapel` 
+															        ON (`mengajar_mapel`.`kode_mapel` = `pengguna`.`kode_mapel`)
+															WHERE `pengguna`.`kode_mapel` = "{$var_mapel}" AND `materi`.`id_tahun_ajaran`="{$var_tahun_ajaran}" AND `materi`.`id_kelas`="{$var_kelas}" AND `materi`.`semester`="{$var_semester}"');
+
+		                        	$num = 1;
+		                        	while ($row = mysql_fetch_array($query)) {
+		                        		
+		                        		$txt_del = "'Yakin ".$row[1]." akan dihapus?'";
+
+		                        		echo '
+		                        				<tr>
+		                        					<td align="center">'.$num.'</td>
+		                        					<td>'.$row[1].'</td>
+                                                    <td>'.$row[2].'</td>
+                                                    <td align="center">'.$row[3].'</td>
+                                                    <td align="center">
+						                                <p>
+						                                	<a href="?page=guru.detail&id='.$row[2].'" class="btn-detail">Detail</a> &nbsp;
+						                                    <a href="?page=guru.form_edit&id='.$row[2].'" class="btn-edit">Edit</a> &nbsp;
+						                                    <a onclick="return confirm('.$txt_del.')" href="?page=guru.delete&id='.$row[2].'" class="btn-hapus">Hapus</a>
+						                                </p>
+						                            </td>
+		                        				</tr>
+		                        			 ';
+
+		                        		$num++;
+		                        	}
+		                        ?>
+		                    </tbody>
+		                </table>   
+		            </div>  <!-- /.table-responsive  -->
+				</div> 
+
+		</div> <!-- /.container -->
+
+</html> 

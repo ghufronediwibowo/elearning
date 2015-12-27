@@ -1,0 +1,161 @@
+				<style type="text/css">
+					img {
+						width: 9cm;
+						height: 6cm;
+					}
+				</style>
+			 	
+			 	<?php
+			 		
+			 		$query = mysql_query('SELECT *
+										  FROM
+										      `elearning`.`berita`
+										      INNER JOIN `elearning`.`pengguna` 
+											  ON (`berita`.`id_pengguna` = `pengguna`.`id_pengguna`)
+										  WHERE `id_berita`="'.$_GET['id'].'"');
+			 		$row = mysql_fetch_assoc($query);
+
+				?>
+
+			 	<h2 class="h2-padding">EDIT DATA BERITA</h2>
+
+			 	<form action="?page=berita.update" method="POST" enctype="multipart/form-data"> 
+					
+					<input type="hidden" name="hidden_id_berita"  value="<?php echo($row['id_berita']);?>">
+
+			 	   	<div>
+				     	<label>Judul Berita</label>
+				    	<div>
+				      		<input id="judul_berita" name="judul_berita" type="text"  value="<?php echo($row['judul_berita']); ?>">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Isi Berita</label>
+				    	<div>
+				      		<textarea id="isi_berita" name="isi_berita" rows="10"> <?php echo($row['isi_berita']); ?> </textarea> 
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tanggal Publish</label>
+				    	<div>
+				      		<input type="text" value="<?php echo (date_format(date_create($row['tanggal_lahir']),'d-m-Y / H:i:s'));?>" disabled />
+				    	</div>
+				  	</div>
+			
+				  	<div>
+				    	<label>Upload Gambar</label>
+				    	<div id="fileDisplayArea">
+				      		<img src="../images/<?php echo($row['gambar']); ?>"  class="thumbnail img-responsive-potrait"/>
+				      	</div>	
+				      	<div>
+				      		<input type="file" name="fupload" id="fileInput" OnClick="imageShow()">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Upload Video</label>
+				      	<div>
+				      		<div>
+				      		<textarea name="video">
+				      			
+				      			<?php echo($row['video']); ?>
+				      		</textarea >
+					    <!-- <input id="judul_berita" name="judul_berita" type="text"  value="<?php echo($row['video']); ?>"> -->
+					    	</div>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				     	<label>Penulis</label>
+				    	<div>
+				      		<input id="level" name="level" type="text" value="<?php echo($row['nama']); ?>" disabled>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<legend>
+				        	Status
+				      	</legend>
+
+				      	<div>
+				        <?php
+                        	if($row['publish']=='Ya'){
+                        ?>
+				      	<div>
+				        	<div>
+				          		<input id="Ya" name="publish" type="radio" value="Ya"  checked="" />
+				          		<label>Ya</label>
+				        	</div>
+				        	<div>
+				          		<input id="Tidak" name="publish" type="radio" value="Tidak" />
+				          		<label>Tidak</label>
+				        	</div>
+				      	</div>
+				      	<?php
+                        	}else{
+                        ?>
+                        <div>
+				        	<div>
+				          		<input id="Ya" name="publish" type="radio" value="Ya" />
+				          		<label>Ya</label>
+				        	</div>
+				        	<div>
+				          		<input id="Tidak" name="publish" type="radio" value="Tidak"  checked=""  />
+				          		<label>Tidak</label>
+				        	</div>
+				      	</div>
+				      	<?php
+                       		}
+                        ?>
+                        </div>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+				</form>
+
+				<script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('isi_berita');
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>
+
+			    <script type="text/javascript">
+					function imageShow() {
+					    var fileInput = document.getElementById('fileInput');
+					    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+					    fileInput.addEventListener('change', function(e) {
+					        var file = fileInput.files[0];
+					        var imageType = /image.*/;
+
+					        if (file.type.match(imageType)) {
+					            var reader = new FileReader();
+
+					            reader.onload = function(e) {
+					                fileDisplayArea.innerHTML = "";
+
+					                var img = new Image();
+					                img.src = reader.result;
+					                fileDisplayArea.appendChild(img);
+					            }
+
+					            reader.readAsDataURL(file);
+					        } else {
+					            fileDisplayArea.innerHTML = "File tidak tersedia!!";
+					        }
+					    });
+
+					    }
+				</script>

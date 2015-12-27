@@ -1,0 +1,21 @@
+<?php
+
+$var_id			= $_POST['hidden_id_kalender_kegiatan'];
+$var_tanggal    = date_format(date_create($_POST['tanggal']),'Y-m-d H:i:s');
+$var_kegiatan   = htmlentities($_POST['title']);
+$var_keterangan = htmlentities($_POST['description']);	
+
+$query  = 'update kalender_kegiatan set tanggal = "'.$var_tanggal.'",
+									  kegiatan = "'.$var_kegiatan.'",
+								    keterangan = "'.$var_keterangan.'"
+								  where id_kalender_kegiatan = "'.$var_id.'"';
+
+$result = mysql_query($query);
+
+if($result) {
+	echo '<script type="text/javascript">alert("Data tersimpan");</script>';
+    echo '<meta http-equiv="refresh" content="0;URL=?page=kalender_kegiatan.data">';
+} 
+
+
+?>

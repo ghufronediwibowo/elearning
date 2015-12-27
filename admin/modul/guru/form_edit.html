@@ -1,0 +1,247 @@
+				
+				<style type="text/css">
+					img {
+						width: 2.8cm;
+						height: 3.8cm;
+					}
+				</style>
+
+			 	<?php
+
+			        $query = mysql_query('select * from pengguna where id_pengguna="'.$_GET['id'].'"');   
+			        $row   = mysql_fetch_assoc($query);
+
+			        $query_mapel    = mysql_query('select * from mengajar_mapel');
+				    $select_mapel = null;
+				    while ($row_mapel = mysql_fetch_assoc($query_mapel)) {
+				        $select_mapel .= '<option value="'.$row_mapel['kode_mapel'].'">'.$row_mapel['kode_mapel'].' - '.$row_mapel['mapel'].'</option>';
+				    }
+
+
+			        $agama = ['Islam', 'Kristen', 'Katholik', 'Hindhu', 'Budha', 'Konghuchu', 'Lainnya'];
+			        $select_agama = null;
+			        foreach ($agama as $agamanya) {
+			            $data_agama  = $agamanya == $row['agama'] ? 'selected' : null;
+			            $select_agama .= '<option '.$data_agama.' value="'.$agamanya.'"> '.$agamanya.' </option>';
+			        }
+
+			        $jenis_kelamin = ['Laki-laki','Perempuan'];
+			        $radio_jenis_kelamin = null;
+			        foreach ($jenis_kelamin as $jenis_kelaminnya) {
+			            $data_jenis_kelamin = $jenis_kelaminnya == $row['jenis_kelamin'] ? 'selected' : null;
+			            $radio_jenis_kelamin .= '<input type="radio" '.$radio_jenis_kelamin.' value="'.$jenis_kelaminnya.'" />'.$jenis_kelaminnya.'';
+			                                           
+			        }
+
+			        foreach ($row as $field => $data) {
+			            $$field = $data;
+			        }
+			 	?>
+
+			 	<h2 class="h2-padding">EDIT DATA GURU</h2>
+
+			 	<form action="?page=guru.update" method="POST" enctype="multipart/form-data"> 
+					<input type="hidden" name="hidden_nip"  value="<?php echo($id_pengguna);?>">
+			 	   	<div>
+				     	<label>Nama</label>
+				    	<div>
+				      		<input id="nama" name="nama" type="text"  value="<?php echo($nama); ?>">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>NIP</label>
+				    	<div>
+				      		<input id="nip" name="id_pengguna" type="text" value="<?php echo($id_pengguna) ?>">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tempat Lahir</label>
+				    	<div>
+				      		<input id="tempat_lahir" name="tempat_lahir" type="text"  value="<?php echo($tempat_lahir) ?>">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tanggal Lahir</label>
+				    	<div>
+				      		<input type="text" name="tanggal_lahir"  id="tanggal_lahir" value="<?php echo date_format( date_create( $tanggal_lahir ) , 'd/m/Y'); ?>" />
+				    	</div>
+				  	</div>
+
+				    <div>
+					    <label>Jenis Kelamin</label>
+
+					    <?php
+                          	if($row['jenis_kelamin']=='Laki-laki'){
+                        ?>
+
+                    	<div>
+				          	<input id="laki-laki" name="jenis_kelamin" type="radio" value="Laki-laki"  checked="" />
+			          		<label>Laki-laki</label> &nbsp; &nbsp; &nbsp;
+			        	
+			          		<input id="perempuan" name="jenis_kelamin" type="radio" value="Perempuan" />
+			          		<label>Perempuan</label>
+				   		</div>
+					
+				      	<?php
+	                    	} else{
+	                    ?>
+                        
+			        	<div>
+			          		<input id="laki-laki" name="jenis_kelamin" type="radio" value="Laki-laki"   />
+			          		<label>Laki-laki</label> &nbsp; &nbsp; &nbsp;
+			       
+			          		<input id="perempuan" name="jenis_kelamin" type="radio" value="Perempuan" checked=""/>
+			          		<label>Perempuan</label>
+			        	</div>
+					    
+				      	<?php
+                       		}
+                        ?>
+                    </div>
+				  	<div>
+				      	<label> Agama </label>
+				      	<div>
+				        	<select name="agama">
+				          		<?php echo($select_agama)?>
+				        	</select>
+				      	</div>
+				    </div>
+				
+				  	<div>
+				    	<label> Alamat </label>
+					    <div>
+					      	<textarea id="alamat" name="alamat" spellcheck="true" rows="5" cols="10" tabindex="2"><?php echo($alamat)?></textarea>
+					    </div>
+				  	</div>
+
+				  	<div>
+				    	<label>Telepon</label>
+				    	<div>
+				      		<input id="telepon" name="telepon" type="text" value="<?php echo($telepon)?>">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				  		<label> Email </label>
+					    <div>
+					      	<input id="email" name="email" type="email" value="<?php echo($email)?>">
+					    </div>
+					</div>
+
+					 <div class="form-group">
+                        <label> Tugas Mengajar </label>
+                        <div>
+                            <select name="mapel" id="tugas_mengajar" >
+                               <?php  echo $select_mapel; ?>
+                            </select>
+                        </div>
+                    </div>
+
+				  	<div>
+				    	<label>Foto</label>
+				    	<div>
+					    	<div id="fileDisplayArea">
+					      		<img src="../images/<?php echo($foto); ?>"  class="thumbnail img-responsive-potrait"/>
+					      	</div>	
+
+					      	<div>
+					      		<input type="file" name="fupload" id="fileInput" OnClick="imageShow()" value="<?php echo($foto); ?>">
+					    	</div>
+				    	</div>
+				  	</div>
+
+				  	<div>
+					  	<label> Status </label>
+
+					  	<?php
+	                    	if($row['status']=='Aktif'){
+	                    ?>
+
+					  	<div>
+					        <input id="Aktif" name="status" type="radio" value="Aktif"  checked="" />
+					        <label>Aktif</label> &nbsp; &nbsp; &nbsp;
+					        
+					        <input id="Tidak Aktif" name="status" type="radio" value="Tidak Aktif" />
+					        <label>Tidak Aktif</label>
+					    </div>
+				      	
+				      	<?php
+                        	} else{
+                        ?>
+                        
+                        <div>
+			          		<input id="Aktif" name="status" type="radio" value="AKtif" />
+			          		<label>Aktif</label> &nbsp; &nbsp; &nbsp;
+					        	
+					        	
+			          		<input id="Tidak Aktif" name="status" type="radio" value="Tidak Aktif"  checked="" />
+			          		<label>Tidak Aktif</label>
+                        </div>
+
+                        <?php
+                       		}
+                        ?>
+                        
+                    </div>
+
+
+				  	<div>
+				     	<label> Level </label>
+				    	<div>
+				      		<input id="level" name="level" type="text" value="GURU" disabled>
+				    	</div>
+				  	</div>
+
+				  	<div class="padding-btn">
+						<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+				  	</div>
+
+
+
+				</form>
+
+				<script>
+
+					$.datetimepicker.setLocale('id');
+
+					$('#tanggal_lahir').datetimepicker({
+						lang:'id',
+						timepicker:false,
+						format:'d/m/Y',
+						formatDate:'Y/m/d'
+					});
+
+				</script>
+
+				<script type="text/javascript">
+					function imageShow() {
+					    var fileInput = document.getElementById('fileInput');
+					    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+					    fileInput.addEventListener('change', function(e) {
+					        var file = fileInput.files[0];
+					        var imageType = /image.*/;
+
+					        if (file.type.match(imageType)) {
+					            var reader = new FileReader();
+
+					            reader.onload = function(e) {
+					                fileDisplayArea.innerHTML = "";
+
+					                var img = new Image();
+					                img.src = reader.result;
+					                fileDisplayArea.appendChild(img);
+					            }
+
+					            reader.readAsDataURL(file);
+					        } else {
+					            fileDisplayArea.innerHTML = "File not supported!";
+					        }
+					    });
+
+					    }
+				</script>

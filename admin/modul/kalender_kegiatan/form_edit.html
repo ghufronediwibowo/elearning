@@ -1,0 +1,66 @@
+				<?php
+					$query = mysql_query('SELECT *
+										  FROM
+										     kalender_kegiatan
+										  WHERE `id_kalender_kegiatan`="'.$_GET['id'].'"');
+			 		$row = mysql_fetch_assoc($query);
+				?>
+		  		
+
+		  		<div class="left"><h2> DATA KALENDER KEGIATAN </h2></div>
+
+		        <div class="clearfix"> </div>
+
+
+		        <div class="left">
+		        
+		            <form classa="form-horizontal" enctype="multipart/form-data" role="form" method="post" id="jadwal" name="jadwal" action="?page=kalender_kegiatan.update">
+		        		
+		        		<input type="hidden" name ="hidden_id_kalender_kegiatan" value="<?php echo($row['id_kalender_kegiatan'])?>">
+                        
+                        <input name="date" id="tanggal" name="tanggal" placeholder="tgl acara" type="text" class="form-control"  value="<?php echo date_format( date_create( $result['tanggal'] ) , 'd/m/Y H:i:s');?>" required/>                  
+
+		                <br /> <br /> 
+						
+						<input name="title" type="text" class="form-control" placeholder="Judul" value="<?php echo($row['kegiatan'])?>" required>
+
+						<br /> <br />
+						<textarea name="description" cols="80" rows="10" class="form-control" required placeholder="Uraian Acara"><?php echo($row['keterangan'])?></textarea> 
+
+						<br /> <br />
+			           <button type="submit" class="btn-submit" name= "btn-submit"> Simpan</button>
+					</form>
+				</div>
+
+				<div class="left">
+			        <div id="eventCalendarHumanDate"></div>
+			    </div>
+
+				<script>
+		            $(document).ready(function() {
+		                $("#eventCalendarHumanDate").eventCalendar({
+		                    eventsjson: '../json/json.php',
+		                    jsonDateFormat: 'human'  // 'YYYY-MM-DD HH:MM:SS'
+		                });
+		            });
+		        </script>
+
+		        <script>
+
+					$.datetimepicker.setLocale('id');
+
+					$('#tanggal').datetimepicker({
+						lang:'id',
+						formatTime:'H:i',
+						format:'d/m/Y H:i:s',
+						formatDate:'Y/m/d',
+						timepickerScrollbar:false
+					});
+
+				</script>
+		            
+		       
+		       
+		         
+		        
+		     

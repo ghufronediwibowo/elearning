@@ -1,0 +1,66 @@
+<?php
+
+	//session_start();
+
+	$var_judul_berita	 = htmlentities($_POST['judul_berita']);
+	$var_isi_berita		 = $_POST['isi_berita'];
+	$var_tanggal		 = date("Y-m-d, H:i");
+	$var_video			 = $_POST['video'];
+	$var_publish 		 = $_POST['publish'];
+	$var_penulis		 = $_SESSION ['id_pengguna'];
+	$lokasi_file 		 = $_FILES['gambar']['tmp_name'];
+	$var_gambar 		 = $_FILES['gambar']['name'];
+	$fileError  		 = $_FILES['gambar']['error'];    
+    $typeGambar 		 = array('image/bmp', 'image/gif', 'image/jpg', 'image/jpeg', 'image/png');
+
+    if(!in_array($_FILES['gambar']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=berita.form_insert">';
+    }
+    elseif($fileSize=$_FILES['gambar']['size']< 20000 || $fileError < 20000)
+    {
+    	$query  ="insert into berita 
+    		      (
+    		      	id_berita,
+    		      	judul_berita,
+    		      	isi_berita,
+    		      	tanggal_publish,
+    		      	publish,
+    		      	id_pengguna,
+    		      	gambar,
+    		      	video
+    		      )	 
+				  values 
+				  (
+				  	'',
+				  	'".$var_judul_berita."',
+				  	'".$var_isi_berita."',
+				  	'".$var_tanggal."',
+				  	'".$var_publish."',
+				  	'".$var_penulis."',
+				  	'".$var_gambar."', 
+				  	'".mysql_real_escape_string($var_video)."'
+				  )"; 
+		//echo($query); exit();
+		$result = mysql_query($query);
+
+		if($result)
+		{
+
+			$derektori="../images/".$var_gambar;
+		    move_uploaded_file($lokasi_file, $derektori);
+
+			echo '<script type="text/javascript"> alert("Data berhasil disimpan."); </script>';
+			echo '<meta http-equiv="refresh" content="0;URL=?page=berita.data">';
+
+		} 
+		else 
+		{
+
+			echo '<script type="text/javascript"> alert("Data gagal disimpan!"); </script>';
+			echo '<meta http-equiv="refresh" content="0;URL=?page=berita.data">';
+		}
+	}
+
+?>

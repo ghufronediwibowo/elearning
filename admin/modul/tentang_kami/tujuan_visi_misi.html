@@ -1,0 +1,62 @@
+
+				
+			 	<form action="#"> 
+
+			 		<div>
+				     	<label>Tujuan</label>
+					    <div>
+					      	<textarea id="sambutan" name="tujuan" rows="10"></textarea>
+					    </div>
+				  	</div>
+
+				  	<div>
+				     	<label>Visi</label>
+					    <div>
+					      	<textarea id="sambutan" name="visi" rows="5"></textarea>
+					    </div>
+				  	</div>
+			
+			 	   	<div>
+				     	<label>Misi</label>
+					    <div>
+					      	<textarea id="sambutan" name="misi" rows="5"></textarea>
+					    </div>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-edit" name="btnEdit" type="submit" value="Edit">
+      					</div>
+    				</div>
+
+				</form>
+
+				<script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('tujuan');
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>
+
+			    <script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('visi');
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>
+
+			    <script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('misi');
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>

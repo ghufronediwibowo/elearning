@@ -1,0 +1,44 @@
+            <?php
+
+                $query = mysql_query('SELECT *
+                                      FROM
+                                        `elearning`.`berita`
+                                        INNER JOIN `elearning`.`pengguna` 
+                                            ON (`berita`.`id_pengguna` = `pengguna`.`id_pengguna`)
+                                     WHERE `id_berita` = "'.filter_input(INPUT_GET,'id').'"');
+
+                $result = mysql_fetch_assoc($query);
+            
+            ?>
+
+            <div class="left"><h2> DETAIL BERITA </h2></div>
+          		<div class="right"><h2><small><?php echo $result['nama'].' / '.date_format( date_create( $result['tanggal_publish'] ) , 'd-m-y H:i:s'); ?></small></h2></div>
+
+          		<div class="clearfix"> </div>
+
+          		<center>
+          		<div class="breadcrumb-2">
+			      	<h4 style="font-size:20px;"> <?php echo($result['judul_berita']); ?> </h4>
+
+			    </div>
+			    </center>
+	            
+	            <div class="breadcrumb-2">
+
+                <center> <img src="../images/<?php echo $result['gambar']; ?>" height="300" width="400"/> </center>
+
+                <br />
+
+                    <?php echo($result['isi_berita'])?>
+            			            	
+	            </div>
+
+	            <div class="breadcrumb-2">
+                    <center>
+                    	<b>Video Edukasi</b> <br/> <br/>
+                       <?php echo $result['video']; ?>
+                        
+                    </center>
+                </div>
+                
+			</div> <!-- /.content -->

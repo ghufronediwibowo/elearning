@@ -1,0 +1,89 @@
+<?php
+    
+    #error_reporting(0);
+
+    $var_nip             = htmlentities($_POST['nip']);
+    $var_nama            = htmlentities($_POST['nama']);
+    $var_tempat_lahir    = htmlentities($_POST['tempat_lahir']);
+    $var_tanggal_lahir   = htmlentities(date_format(date_create($_POST['tanggal_lahir']),'Y-m-d'));
+    #echo($var_tanggal_lahir); exit;
+    $var_jenis_kelamin   = htmlentities($_POST['jenis_kelamin']);
+    $var_agama           = htmlentities($_POST['agama']);
+    $var_alamat          = htmlentities($_POST['alamat']);
+    $var_tugas_mengajar  = $_POST['mapel'];
+    $var_telepon         = htmlentities($_POST['telepon']);
+    $var_email           = htmlentities($_POST['email']);
+    $var_username        = htmlentities($_POST['username']);
+    $var_password        = htmlentities(md5($_POST['password']));
+    $var_ver_password    = htmlentities($_POST['password']);
+    $var_status          = htmlentities($_POST['status']);
+
+    $lokasi_file         = $_FILES['fupload']['tmp_name'];
+    $nama_file           = $_FILES['fupload']['name'];
+    $fileError           = $_FILES['fupload']['error'];    
+    $typeGambar          = array('image/bmp', 'image/gif', 'image/jpg', 'image/jpeg', 'image/png');
+
+    if(!in_array($_FILES['fupload']['type'],$typeGambar))
+    { 
+        echo '<script type="text/javascript"> alert("Format gambar salah!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=siswa.form_insert">';
+    }
+    elseif($fileSize=$_FILES['fupload']['size']< 20000 || $fileError < 20000)
+    {
+        $query="insert into pengguna 
+                (id_pengguna,
+                 nama,
+                 tempat_lahir,
+                 tanggal_lahir,
+                 jenis_kelamin,
+                 agama,
+                 alamat,
+                 kode_mapel,
+                 telepon,
+                 email,
+                 username,
+                 password,
+                 verifikasi_password,
+                 level,
+                 status,
+                 foto
+                ) 
+                values 
+                ('".$var_nip."',
+                 '".$var_nama."',
+                 '".$var_tempat_lahir."',
+                 '".$var_tanggal_lahir."',
+                 '".$var_jenis_kelamin."',
+                 '".$var_agama."',
+                 '".$var_alamat."',
+                 '".$var_tugas_mengajar."',
+                 '".$var_email."',
+                 '".$var_username."',
+                 '".$var_password."',
+                 '".$var_ver_password."',
+                 'GURU',
+                 '".$var_status."',
+                 '".$nama_file."')";
+              echo $query;
+              exit;
+        $result=mysql_query($query);
+        
+        if ($result)
+        {
+            
+            $derektori="../images/".$nama_file;
+            move_uploaded_file($lokasi_file,"$derektori");
+               //echo "berhasil";
+            echo '<script type="text/javascript"> alert("Data berhasil disimpan."); </script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=guru.data">';
+
+        } 
+        else 
+        {
+
+        echo '<script type="text/javascript"> alert("Data gagal disimpan!"); </script>';
+        echo '<meta http-equiv="refresh" content="0;URL=?page=guru.data">';
+        }
+    }
+
+?>  

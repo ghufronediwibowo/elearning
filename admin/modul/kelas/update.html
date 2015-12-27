@@ -1,0 +1,24 @@
+<?php
+	
+	$var_id_kelas	= $_POST['hidden_id_kelas'];
+	$var_nama_kelas = htmlentities($_POST['nama_kelas']);
+	$var_kelas      = htmlentities($_POST['kelas']);
+	$var_jurusan	= htmlentities($_POST['jurusan']);
+
+	$query	= 'update kelas set nama_kelas = '.strip_tags("'$var_nama_kelas'").', kelas = "'.$var_kelas.'", jurusan= '.strip_tags("'$var_jurusan'").' where id_kelas = "'.$_POST['hidden_id_kelas'].'"';
+	#die($query);
+
+	$result = mysql_query($query);
+
+	if ($result) {
+
+		echo '<script type="text/javascript"> alert("Data berhasil disimpan.") </script>';
+		echo '<meta http-equiv="refresh" content=0;URL=?page=kelas.data>';
+
+	} else {
+
+		echo '<script type="text/javascript"> alert(Data gagal disimpan!)</script>';
+		echo '<meta http-equiv="refresh" content="0;URL=?page=kelas.data">';
+	}
+
+?>

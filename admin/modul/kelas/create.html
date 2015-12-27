@@ -1,0 +1,23 @@
+<?php
+
+	$var_nama_kelas = htmlentities($_POST['nama_kelas']);
+	$var_kelas      = htmlentities($_POST['kelas']);
+	$var_jurusan	= htmlentities($_POST['jurusan']);
+
+	$query	= 'insert into kelas values ("",'.strip_tags("'$var_nama_kelas'").',"'.$var_kelas.'",'.strip_tags("'$var_jurusan'").')';
+	#die($query);
+
+	$result = mysql_query($query);
+
+	if ($result) {
+
+		echo '<script type="text/javascript"> alert("Data berhasil disimpan.") </script>';
+		echo '<meta http-equiv="refresh" content=0;URL=?page=kelas.data>';
+
+	} else {
+
+		echo '<script type="text/javascript"> alert(Data gagal disimpan!)</script>';
+		echo '<meta http-equiv="refresh" content="0;URL=?page=kelas.data">';
+	}
+
+?>

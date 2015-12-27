@@ -1,0 +1,221 @@
+				<style type="text/css">
+					img {
+						width: 2.8cm;
+						height: 3.8cm;
+					}
+				</style>
+
+
+				<?php
+					$query_mapel  = mysql_query('select * from mengajar_mapel');
+				    $select_mapel = null;
+				    while ($row_mapel = mysql_fetch_assoc($query_mapel)) {
+				        $select_mapel .= '<option value="'.$row_mapel['kode_mapel'].'">'.$row_mapel['kode_mapel'].' - '.$row_mapel['mapel'].'</option>';
+				    }
+
+				?>
+
+			 	<h2 class="h2-padding">TAMBAH DATA GURU</h2>
+
+			 	<form action="?page=guru.create" method="POST" enctype="multipart/form-data"> 
+			
+			 	   	<div>
+				     	<label>Nama</label>
+				    	<div>
+				      		<input id="nama" name="nama" type="text"/>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>NIP</label>
+				    	<div>
+				      		<input id="nip" name="nip" type="text"/>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tempat Lahir</label>
+				    	<div>
+				      		<input id="tempat_lahir" name="tempat_lahir" type="text"/>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tanggal Lahir</label>
+				    	<div>
+				      		<input type="text" name="tanggal_lahir" id="tanggal_lahir"/>
+				    	</div>
+				  	</div>
+
+				  	<div>
+					   <label>Jenis Kelamin</label>
+
+				      	<div>
+				        
+				          		<input id="jenis_kelamin" name="jenis_kelamin" type="radio" value="Laki-laki" checked="checked" />
+				          		<label>Laki-laki</label> &nbsp; &nbsp; &nbsp;
+				        	
+				          		<input id="jenis_kelamin" name="jenis_kelamin" type="radio" value="Perempuan" />
+				          		<label>Perempuan</label>
+				        	
+				      	</div>
+				
+				  	</div>
+
+				  	<div>
+				    	<label>Tanggal Lahir</label>
+				    	<div>
+				      		<input type="text" name="tanggal_lahir" id="tanggal_lahir"/>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				      	<label> Agama </label>
+				      	<div>
+				        	<select name="agama">
+				          		<option value="Islam">Islam</option>
+				          		<option value="Kristen">Kristen</option>
+				          		<option value="Khatolik">Khatolik</option>
+				          		<option value="Hindu">Hindu</option>
+				          		<option value="Budha">Budha</option>
+				          		<option value="Konghuchu">Konghuchu</option>
+				          		<option value="Lainnya">Lainnya</option>
+				        	</select>
+				      	</div>
+				    </div>
+				
+				  	<div>
+				    	<label> Alamat </label>
+					    <div>
+					      	<textarea id="alamat" name="alamat" rows="5"></textarea>
+					    </div>
+				  	</div>
+
+				  	<div>
+				    	<label>Telepon</label>
+				    	<div>
+				      		<input id="telepon" name="telepon" type="text">
+				    	</div>
+				  	</div>
+
+				  	<div>
+					    <label> Email </label>
+					    <div>
+					      	<input id="email" name="email" type="text" />
+					    </div>
+					</div>
+
+					<div>
+                        <label> Tugas Mengajar </label>
+                        <div>
+                            <select name="mapel" id="tugas_mengajar" >
+                               <?php  echo $select_mapel; ?>
+                            </select>
+                        </div>
+                    </div>
+
+			 	   	<div>
+				     	<label> Username </label>
+				    	<div>
+				      		<input id="username" name="username" type="text"/>
+				    	</div>
+				  	</div>
+				  	
+				  	<div>
+				    	<label> Password </label>
+				    	<div>
+				      		<input id="password" name="password" type="password" />
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label> Verifikasi Password </label>
+				    	<div>
+				      		<input id="verifikasi_password" name="verifikasi_password" type="password">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label> Foto </label>
+					    <div>
+
+						    <div id="fileDisplayArea"> </div>	
+					      	
+					      	<div>
+					      		<input type="file" name="fupload" id="fileInput" OnClick="imageShow()">
+					    	</div>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				     	<label>Level</label>
+				    	<div>
+				      		<input id="level" name="level" type="text" value="GURU" disabled>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				  		<label>Status</label>
+					    
+			        	<div>
+			          		<input id="status" name="status" type="radio" value="Aktif" checked="checked">
+			          		<label class="choice">Aktif</label> &nbsp; &nbsp; &nbsp;
+				        	
+			          		<input id="status" name="status" type="radio" value="Tidak Aktif">
+			          		<label class="choice">Tidak Aktif</label>
+			        	</div>
+					  
+				  	</div>
+
+				  	<div class="padding-btn">	
+						<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+    				</div>
+
+				</form>
+
+				<script>
+
+					$.datetimepicker.setLocale('id');
+
+					$('#tanggal_lahir').datetimepicker({
+						lang:'id',
+						timepicker:false,
+						format:'d/m/Y',
+						formatDate:'Y/m/d'
+					});
+
+				</script>
+
+				<script type="text/javascript">
+					function imageShow() {
+					    var fileInput = document.getElementById('fileInput');
+					    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+					    fileInput.addEventListener('change', function(e) {
+					        var file = fileInput.files[0];
+					        var imageType = /image.*/;
+
+					        if (file.type.match(imageType)) {
+					            var reader = new FileReader();
+
+					            reader.onload = function(e) {
+					                fileDisplayArea.innerHTML = "";
+
+					                var img = new Image();
+					                img.src = reader.result;
+					                fileDisplayArea.appendChild(img);
+					            }
+
+					            reader.readAsDataURL(file);
+					        } else {
+					            fileDisplayArea.innerHTML = "File tidak tersedia!!";
+					        }
+					    });
+
+					    }
+				</script>
+
+				
+
+

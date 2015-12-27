@@ -1,0 +1,75 @@
+				<style type="text/css">
+					img {
+						width: 2.8cm;
+						height: 3.8cm;
+					}
+				</style>
+
+				<?php
+
+					$query = mysql_query('SELECT *
+										  FROM
+										  		`elearning`.`mengajar_mapel`
+										 	INNER JOIN `elearning`.`pengguna` 
+											ON (`mengajar_mapel`.`kode_mapel` = `pengguna`.`kode_mapel`)
+										WHERE `id_pengguna` ="'.filter_input(INPUT_GET,'id').'"');
+    				$result = mysql_fetch_assoc($query);
+				
+				?>				
+				
+				<div class="breadcrumb-2" style="width:100%">
+	      			<section>
+				        <div class="bio-row">
+	                        <p><span>Nama </span>: <?php echo($result['nama']); ?> </p>
+	                    </div>
+	                    
+	                    <div class="bio-row">
+	                      	<p><span>Telepon </span>: <?php echo($result['telepon']); ?></p>
+	                    </div>
+	                     
+						<div class="bio-row">
+	                      	<p><span>NIP </span>: <?php echo($result['id_pengguna']); ?> </p>
+	                    </div>
+						
+	                    <div class="bio-row">
+	                      	<p><span>Email </span>: <?php echo($result['email']); ?></p>
+	                    </div>
+	                   	
+	                    
+	                    <div class="bio-row">
+	                      	<p><span>Tempat/Tanggal Lahir</span>: <?php echo $result['tempat_lahir'].' / '.date_format( date_create( $result['tanggal_lahir'] ) , 'd-m-Y'); ?></p>
+	                    </div>                               
+	                  	
+
+	                    <div class="bio-row">
+	                      	<p><span>Tugas Mengajar </span>: <?php echo($result['mapel']); ?> </p>
+	                    </div>
+
+						<div class="bio-row">
+	                        <p><span>Jenis Kelamin  </span>: <?php echo($result['jenis_kelamin']); ?></p>
+						</div>
+
+	                    <div class="bio-row">
+	                      	<p><span>Status </span>: <?php echo($result['status']); ?> </p>
+	                    </div>
+
+						<div class="bio-row">
+	                      	<p><span>Alamat </span>: <?php echo($result['alamat']); ?> </p>
+	                    </div>
+	                    
+	                    <div class="bio-row">
+	                      	<p><span>Level </span>: <?php echo($result['level']); ?> </p>
+	                    </div>
+
+	                    <div class="bio-row">
+	                        <p><span>Agama </span>: <?php echo($result['agama']); ?> </p>
+	                    </div>
+
+	                    <div class="bio-row">
+	                      	<p> <img src="../images/<?php echo($result['foto']); ?>"  class="thumbnail img-responsive-potrait"/> </p>
+	                    </div>
+
+	                    
+	            	</section>  
+	      		</div>
+      		

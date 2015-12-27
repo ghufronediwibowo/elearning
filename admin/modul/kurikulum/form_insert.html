@@ -1,0 +1,77 @@
+
+
+			 	
+			 	<h2 class="h2-padding">TAMBAH DATA KURIKULUM</h2>
+
+			 	<form action="?page=kurikulum.create" method="POST" enctype="multipart/form-data"> 
+			
+				  	<div>
+				    	<label>Kurikulum</label>
+				    	<div>
+				      		<textarea id="kurikulum" name="kurikulum" rows="10" cols="80"></textarea> 
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Upload File</label>
+				      	<div>
+				      		<input type="file" name="file">
+				    	</div>
+				  	</div>
+
+					<div>
+					    <fieldset>
+					      	<legend>
+					        	Publish
+					      	</legend>
+
+					      	<div>
+					        	<div>
+					          		<input id="publish" name="publish" type="radio" value="Ya" tabindex="5" checked="checked">
+					          		<label>Ya</label>
+					        	</div>
+					        	<div>
+					          		<input id="publish" name="publish" type="radio" value="tidak" tabindex="6">
+					          		<label>Tidak</label>
+					        	</div>
+					      	</div>
+					    </fieldset>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-submit" name="btn-simpan" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+    				 <?php
+					if(isset($_GET['success']))
+					{
+						?>
+				        <label>File Uploaded Successfully...  <a href="view.php">click here to view file.</a></label>
+				        <?php
+					}
+					else if(isset($_GET['fail']))
+					{
+						?>
+				        <label>Problem While File Uploading !</label>
+				        <?php
+					}
+					else
+					{
+						?>
+				        <label>Try to upload any files(PDF, DOC, EXE, VIDEO, MP3, ZIP,etc...)</label>
+				        <?php
+					}
+					?>
+				</form>
+
+				<script type="text/javascript">
+			        $(function() {
+			            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+			            // instance, using default configuration.
+			            CKEDITOR.replace('kurikulum')
+			            //bootstrap WYSIHTML5 - text editor
+			            // $(".textarea").wysihtml5();
+			        });
+			    </script>

@@ -1,0 +1,19 @@
+<?php
+	
+	$query  = 'delete from kurikulum where id_kurikulum = "'.$_GET['id'].'"';
+
+	#echo($query) ; exit;
+	$result = mysql_query($query);
+
+	if ($result) {
+			
+			echo '<script type="text/javascript"> alert("Data berhasil dihapus.") </script>';
+			echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+
+		} else {
+
+			echo '<script type="text/javascript"> alert("Data gagal dihapus!") </script>';
+			echo '<meta http-equiv="refresh" content="0;URL=?page=kurikulum.data">';
+		} 
+
+?>

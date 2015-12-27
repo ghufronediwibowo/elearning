@@ -1,0 +1,73 @@
+<?php
+	
+	$var_id_berita    = $_POST['hidden_id_berita'];
+	$var_judul_berita = htmlentities($_POST['judul_berita']);
+	$var_isi_berita	  = $_POST['isi_berita'];
+    $var_tanggal      = date("Y-m-d H:i");
+	$var_publish	  = $_POST['publish'];
+    $var_video        = $_POST['video'];
+	$lokasi_file      = $_FILES['fupload']['tmp_name'];
+    $nama_file        = $_FILES['fupload']['name'];
+    $fileError        = $_FILES['fupload']['error'];    
+    $typeGambar       = array('image/bmp', 'image/gif', 'image/jpg', 'image/jpeg', 'image/png');
+
+  //  echo $var_video; exit;
+    
+
+    if(!empty($nama_file))
+    {
+
+        $query = 'update berita set judul_berita = "'.$var_judul_berita.'",
+                                      isi_berita = "'.mysql_real_escape_string($var_isi_berita).'",
+                                 tanggal_publish = "'.$var_tanggal.'",
+                                        publish  = "'.$var_publish.'",
+                                         gambar  = "'.$nama_file.'",
+                                         video   = "'.mysql_real_escape_string($var_video).'"
+                                 where id_berita = "'.$var_id_berita.'"';
+                              // echo($query);exit();
+        $result = mysql_query($query);
+
+       // if ($result) {
+
+            $derektori="../images/".$nama_file;
+            move_uploaded_file($lokasi_file,$derektori);
+            echo '<script type="text/javascript">alert("Data tersimpan");</script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=berita.data">';
+        
+      /*  }   else {
+            
+            //echo($query);
+
+            // echo '<script type="text/javascript">alert("Gagal melakukan perintah query qone");</script>';
+            // echo '<meta http-equiv="refresh" content="0;URL=?page=berita.data">';
+        
+        }*/
+    }
+
+    else 
+    {
+
+        $query = 'update berita set judul_berita = "'.$var_judul_berita.'",
+                                      isi_berita = "'.mysql_real_escape_string($var_isi_berita).'",
+                                 tanggal_publish = "'.$var_tanggal.'",
+                                        publish  = "'.$var_publish.'",
+                                         video   = "'.mysql_real_escape_string($var_video).'"
+                                 where id_berita = "'.$var_id_berita.'"';
+                              # echo($query);exit();
+        $result = mysql_query($query);
+
+       /* if ($result) {*/
+
+            echo '<script type="text/javascript">alert("Data tersimpan");</script>';
+            echo '<meta http-equiv="refresh" content="0;URL=?page=berita.data">';
+        
+     /*   }   else {
+            
+            #echo($query);
+
+             echo '<script type="text/javascript">alert("Gagal melakukan perintah query qone");</script>';
+             echo '<meta http-equiv="refresh" content="0;URL=?page=berita.data">';
+        
+        }*/
+    }
+?>

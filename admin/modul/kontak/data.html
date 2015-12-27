@@ -1,0 +1,61 @@
+
+        <?php
+
+          $query = mysql_query('select * from kontak');
+          $row   = mysql_fetch_assoc($query); 
+        ?>
+
+
+        <h2 class="h2-padding"> DATA KONTAK </h2>
+
+        <form action="?page=kontak.update" method="POST"> 
+
+            <input type="hidden" name="id_kontak" value="<?php echo($row['id_kontak']); ?>">
+            
+
+            <div>
+              <label>
+                Alamat 
+              </label>
+              <div>
+                  <input id="alamat" name="jancukkkkkkk" type="text"  value="<?php echo($row['alamat']); ?>">
+              </div>
+            </div>
+
+            <div>
+              <label>Telepon</label>
+              <div>
+                  <input id="telepon" name="telepon" type="text"  value="<?php echo($row['telepon']); ?>">
+              </div>
+            </div>
+
+            <div>
+              <label>
+                  Email
+              </label>
+              <div>
+                  <input id="email" name="email" type="email" value="<?php echo($row['email']); ?>">
+              </div>
+            </div>
+
+            <div>
+              <label>Facebook</label>
+              <div>
+                  <input id="facebook" name="facebook" type="text"  value="<?php echo($row['facebook']); ?>">
+              </div>
+            </div>
+
+            <div>
+              <label>Twitter</label>
+              <div>
+                  <input id="twitter" name="twitter" type="text"  value="<?php echo($row['twitter']); ?>">
+              </div>
+            </div>
+
+            <div>
+                <div>
+                  <input class="btn-edit" name="btnEdit" type="submit" value="Edit">
+                </div>
+            </div>
+
+        </form>

@@ -1,0 +1,129 @@
+
+			 	<style type="text/css">
+					img {
+						width: 9cm;
+						height: 6cm;
+					}
+				</style>
+
+			 	<h2 class="h2-padding">TAMBAH DATA BERITA</h2>
+
+			 	<form action="?page=berita.create" method="POST" enctype="multipart/form-data"> 
+			
+			 	   	<div>
+				     	<label>Judul Berita</label>
+				    	<div>
+				      		<input id="judul_berita" name="judul_berita" type="text">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Isi Berita</label>
+				    	<div>
+				      		<textarea id="txt_isi_berita" name="isi_berita" rows="10"></textarea> 
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Tanggal Publish</label>
+				    	<div>
+				      		<input type="text" disabled  name="tanggal_publish" value="<?php echo date('d-M-Y'); ?>" />
+				    	</div>
+				  	</div>
+			
+				  	<div>
+				    	<label>Upload Gambar</label>
+				    	<div id = "fileDisplayArea">
+				      
+				      	</div>	
+				      	<div>
+				      		<input name="gambar" type="file" id="fileInput" OnClick="imageShow()">
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>Upload Video</label>
+				      	<div>
+				      		<input id="btnfoto" name="video" type="text" >
+				    	</div>
+				  	</div>
+
+				  	<div>
+				     	<label>Penulis</label>
+				    	<div>
+				      		<input id="penulis" name="penulis" type="text" value="<?php echo($_SESSION['nama']); ?>" disabled>
+				    	</div>
+				  	</div>
+
+				  	<div>
+					    <fieldset>
+					      	<legend>
+					        	Publish
+					      	</legend>
+
+					      	<div>
+					        	<div>
+					          		<input id="publish" name="publish" type="radio" value="Ya" tabindex="5" checked="checked">
+					          		<label>Ya</label>
+					        	</div>
+					        	<div>
+					          		<input id="publish" name="publish" type="radio" value="tidak" tabindex="6">
+					          		<label>Tidak</label>
+					        	</div>
+					      	</div>
+					    </fieldset>
+				  	</div>
+
+					<div>
+      					<div>
+        					<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+      					</div>
+    				</div>
+
+				</form>
+
+
+			</div>
+
+		</div><!-- /container -->
+
+		<script type="text/javascript">
+	        $(function() {
+	            // Replace the <textarea id="txt_isi_berita"> with a CKEditor
+	            // instance, using default configuration.
+	            CKEDITOR.replace('txt_isi_berita');
+	            //bootstrap WYSIHTML5 - text editor
+	            // $(".textarea").wysihtml5();
+	        });
+	    </script>
+
+	    <script type="text/javascript">
+			function imageShow() {
+			    var fileInput = document.getElementById('fileInput');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File tidak tersedia!!";
+			        }
+			    });
+
+			    }
+		</script>
+

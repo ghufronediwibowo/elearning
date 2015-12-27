@@ -1,0 +1,54 @@
+
+
+		  		<div class="left"><h2> DATA GURU </h2></div>
+          		<div class="right"><h2><a href="form_tambah.html"> Tambah Data? </a></h2></div>
+	            
+	            <div class="clearfix"> </div>
+
+	            <div class="content-table">
+			 	    <div class="table-responsive">
+		                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+		                    <thead>
+		                        <tr>
+		                            <th style="background-color: #515151; width:5%" > No </th>
+		                            <th style="background-color: #515151; width:10%" > NIP </th>
+		                            <th style="background-color: #515151; width: 20%" > Nama </th>
+		                            <th style="background-color: #515151;" > Telepon </th>
+		                            <th style="background-color: #515151;" > Status </th>
+		                            <th style="background-color: #515151; width: 23%" > Aksi </th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <?php
+		                        	$query = mysql_query('select * from pengguna where level = "ADMIN"');
+
+		                        	$num = 1;
+		                        	while ($row = mysql_fetch_array($query)) {
+		                        		
+		                        		$txt_del = "'Yakin ".$row[4]." akan dihapus?'";
+
+		                        		echo '
+		                        				<tr>
+		                        					<td align="center">'.$num.'</td>
+		                        					<td>'.$row[0].'</td>
+                                                    <td>'.$row[4].'</td>
+                                                    <td align="center">'.$row[10].'</td>
+                                                    <td align="center">'.$row[11].'</td>
+                                                    <td align="center">
+						                                <p>
+						                                	<a href="detail.html" class="btn-detail">Detail</a> &nbsp;
+						                                    <a href="form_edit.html" class="btn-edit">Edit</a> &nbsp;
+						                                    <a href="#" class="btn-hapus">Hapus</a>
+						                                </p>
+						                            </td>
+		                        				</tr>
+		                        			 ';
+
+		                        		$num++;
+		                        	}
+		                        ?>
+		                    </tbody>
+		                </table>   
+		            </div>  <!-- /.table-responsive  -->
+				</div> 
+			

@@ -1,0 +1,21 @@
+<?php
+	
+	$var_tahun_ajaran = htmlentities($_POST['tahun_ajaran']);
+	
+	$query	= 'update tahun_ajaran set tahun_ajaran= '.strip_tags("'$var_tahun_ajaran'").' where id_tahun_ajaran = "'.$_POST['hidden_id_tahun_ajaran'].'"';
+	#die($query);
+
+	$result = mysql_query($query);
+
+	if ($result) {
+
+		echo '<script type="text/javascript"> alert("Data berhasil disimpan.") </script>';
+		echo '<meta http-equiv="refresh" content=0;URL=?page=tahun_ajaran.data>';
+
+	} else {
+
+		echo '<script type="text/javascript"> alert(Data gagal disimpan!)</script>';
+		echo '<meta http-equiv="refresh" content="0;URL=?page=tahun_ajaran.data">';
+	}
+
+?>

@@ -1,0 +1,418 @@
+			 	<style type="text/css">
+					img {
+						width:237px;
+      					height:170px;
+					}
+				</style>
+
+			 	<?php
+			 		
+			 		$query_album  = mysql_query('select * from album');
+				    $select_album = null;
+				    while ($row_album = mysql_fetch_assoc($query_album)) {
+				        $select_album .= '<option value="'.$row_album['id_album'].'">'.$row_album['album'].'</option>';
+				    }
+
+			 	?>
+
+
+			 	<h2 class="h2-padding">TAMBAH GAMBAR</h2>
+
+			 	<form action="?page=gambar_slide.create" method="POST" enctype="multipart/form-data"> 
+
+			 		<div>
+				      	<label> Pilih Album </label>
+				      	<div>
+				        	<select name="album">
+				        		<?php echo($select_album); ?>
+				        	</select>
+				      	</div>
+				    </div>
+
+				    <br>
+
+				  	<div>
+				    	<label>Foto (1)</label>
+				    	<div> 
+					    	<div id="fileDisplayArea1"> </div>
+					      	<div>
+					      		<input type="file" name="gambar1" id="gambar1" OnClick="image1Show()" />
+					    	</div>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan1" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+
+				  	<div>
+				    	<label>Foto (2)</label>
+				    	<div>
+					    	<div id="fileDisplayArea2"> </div>
+					      	<div>
+					      		<input type="file" name="gambar2" id="gambar2" OnClick="image2Show()" />
+					    	</div>
+					    </div>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan2" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+
+				  	<div>
+				    	<label>Foto (3)</label>
+				    	<div>
+					    	<div id="fileDisplayArea3"> </div>
+					      	<div>
+					      		<input type="file" name="gambar3" id="gambar3" OnClick="image3Show()" />
+					    	</div>
+					    </div>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan 
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan3" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+
+				  	<div>
+				    	<label>Foto (4)</label>
+				    	<div>
+					    	<div id="fileDisplayArea4"> </div>
+					    	<div>
+						      	<div>
+						      		<input type="file" name="gambar4" id="gambar4" OnClick="image4Show()" />
+						    	</div>
+					  		</div>
+					  	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan 
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan4" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+
+				  	<div>
+				    	<label>Foto (5)</label>
+				    	<div>
+					    	<div id="fileDisplayArea5"> </div>
+					      	<div>
+					      		<input type="file" name="gambar5" id="gambar5" OnClick="image5Show()" />
+					    	</div>
+				    	</div>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan 
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan5" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+
+				  	<div>
+				    	<label>Foto (6)</label>
+				    	<div>
+					    	<div id="fileDisplayArea6"> </div>
+					      	<div>
+					      		<input type="file" name="gambar6" id="gambar6" OnClick="image6Show()" />
+					    	</div>
+					    </div>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan 
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan6" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+
+				  	<div>
+				    	<label>Foto (7)</label>
+				    	<diV>
+					    	<div id="fileDisplayArea7"> </div>
+					      	<div>
+					      		<input type="file" name="gambar7" id="gambar7" OnClick="image7Show()" />
+					    	</div>
+				    	</diV>
+				  	</div>
+
+				  	<div>
+				    	<label>
+				     		Keterangan 
+				    	</label>
+					    <div>
+					      	<textarea id="keterangan" name="keterangan7" rows="2"></textarea>
+					    </div>
+				  	</div>
+
+				  	<br>
+				  	
+					<div class="padding-btn">	
+						<input class="btn-submit" name="btnSimpan" type="submit" value="Simpan">
+    				</div>
+
+				</form>
+
+
+		<script type="text/javascript">		
+			$.datetimepicker.setLocale('id');
+
+			$('#tanggal_lahir').datetimepicker({
+				lang:'id',
+				timepicker:false,
+				format:'d/m/Y',
+				formatDate:'Y/m/d'
+			});
+		</script>
+
+		<script type="text/javascript">
+			function image1Show() {
+			    var fileInput = document.getElementById('gambar1');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea1');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+		<script type="text/javascript">
+			function image2Show() {
+			    var fileInput = document.getElementById('gambar2');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea2');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+		<script type="text/javascript">
+			function image3Show() {
+			    var fileInput = document.getElementById('gambar3');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea3');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+		<script type="text/javascript">
+			function image4Show() {
+			    var fileInput = document.getElementById('gambar4');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea4');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+		<script type="text/javascript">
+			function image5Show() {
+			    var fileInput = document.getElementById('gambar5');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea5');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+		<script type="text/javascript">
+			function image6Show() {
+			    var fileInput = document.getElementById('gambar6');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea6');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+		<script type="text/javascript">
+			function image7Show() {
+			    var fileInput = document.getElementById('gambar7');
+			    var fileDisplayArea = document.getElementById('fileDisplayArea7');
+
+
+			    fileInput.addEventListener('change', function(e) {
+			        var file = fileInput.files[0];
+			        var imageType = /image.*/;
+
+			        if (file.type.match(imageType)) {
+			            var reader = new FileReader();
+
+			            reader.onload = function(e) {
+			                fileDisplayArea.innerHTML = "";
+
+			                var img = new Image();
+			                img.src = reader.result;
+			                fileDisplayArea.appendChild(img);
+			            }
+
+			            reader.readAsDataURL(file);
+			        } else {
+			            fileDisplayArea.innerHTML = "File not supported!";
+			        }
+			    });
+
+			    }
+		</script>
+
+
+	
