@@ -1,6 +1,6 @@
 <?php  
 include('inc_db.php');
-//exit;
+//exit();
 ?>
 <!doctype html>
 <html lang=''>
